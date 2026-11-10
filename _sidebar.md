@@ -1,3 +1,7 @@
+- **Get Started**
+  - [Installation](docs/installation.md)
+  - [Skill entry point](SKILL.md)
+
 - **Overview**
   - [Home](/)
   - [Handoff & Execution](docs/agent-handoff-and-execution.md)
