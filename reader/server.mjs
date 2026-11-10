@@ -109,7 +109,7 @@ export async function handler(req, res) {
       const names = (await fsp.readdir(plansDir)).filter(x => x.endsWith('.md') && validId(x.slice(0,-3)));
       const items = await Promise.all(names.map(async name => {
         const id = name.slice(0,-3), plan = await loadPlan(id), review = await loadReview(id);
-        const approved = review.approval?.approvedRevision === plan.revision;
+        const approved = review.approval?.status === 'APPROVED' && review.approval?.approvedRevision === plan.revision && !review.comments.some(c => c.status === 'OPEN');
         return { id, title:plan.markdown.match(/^#\s+(.+)$/m)?.[1] || id, revision:plan.revision, status:approved?'APPROVED':review.approval?.status==='APPROVED'?'NEEDS_REVIEW':review.approval?.status || 'DRAFT', openComments:review.comments.filter(c=>c.status==='OPEN').length };
       }));
       return send(res, 200, { project:path.basename(root), plans:items });
@@ -121,7 +121,7 @@ export async function handler(req, res) {
     if (!plan) return fail(res, 404, 'Plan does not exist');
     if (req.method === 'GET' && !action) {
       const review = await loadReview(id);
-      return send(res, 200, { ...plan, review, approvalCurrent:review.approval?.approvedRevision===plan.revision });
+      return send(res, 200, { ...plan, review, approvalCurrent:review.approval?.status==='APPROVED' && review.approval?.approvedRevision===plan.revision && !review.comments.some(c=>c.status==='OPEN') });
     }
     if (req.method !== 'GET' && !authorizedWrite(req)) return fail(res, 403, 'Invalid local write token/origin');
     if (req.method === 'POST' && action === 'comments' && !commentId) {
