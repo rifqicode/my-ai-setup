@@ -109,6 +109,10 @@ my-ai-setup/
     └── claude/
 ```
 
+## Architecture documents
+
+- [Agent Handoff & Execution (v0.4)](docs/agent-handoff-and-execution.md) — delegation, parallel execution rules, progress tracking, integration and QA gates.
+
 ## Next design topics
 
 - Detail Orchestrator-to-agent handoffs and evidence format without introducing duplicate documents.
