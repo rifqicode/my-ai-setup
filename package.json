@@ -1,0 +1,15 @@
+{
+  "name": "my-ai-setup-local-reader",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "docs": "node reader/server.mjs",
+    "test:reader": "node --test reader/server.test.mjs"
+  },
+  "dependencies": {
+    "marked": "^15.0.12",
+    "sanitize-html": "^2.15.0"
+  }
+}
