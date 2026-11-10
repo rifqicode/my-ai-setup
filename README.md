@@ -133,6 +133,11 @@ These are **portable role specifications** referenced by the installable root SK
 
 - [Install and verify](docs/installation.md) — one-command global or project-local installation, platform requirements and limitations.
 
+## Local interactive planning workspace (design v0.5)
+
+- [Local AI Planning Workspace architecture](docs/local-planning-workspace.md) — project-local live Markdown, inline comments, revision-bound approval, and a CLI-readable feedback sidecar. **This interactive local workspace is not yet implemented.**
+- Existing [Docsify reader](docs/index.html) is a separate static documentation viewer for this setup repository, **not** the local interactive plan review app.
+
 ## Plan template & browser reader
 
 - [Technical Implementation Plan template](templates/technical-implementation-plan.md) — one approved plan doubles as the agent task contract; per-task work status and verification stay separate.
@@ -144,6 +149,9 @@ These are **portable role specifications** referenced by the installable root SK
 - [Agent Handoff & Execution (v0.4)](docs/agent-handoff-and-execution.md) — delegation, parallel execution rules, progress tracking, integration and QA gates.
 
 ## Next design topics
+
+- Implement local-first reader/server with file watching, anchored comments and review status.
+- Wire explicit browser-feedback review into Orchestrator and verify across CLIs.
 
 - Implement and validate CLI adapters that locate the same canonical plan from any host.
 - Test the static reader in GitHub Pages after publication and secure private-project plan viewing separately.
