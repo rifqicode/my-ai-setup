@@ -12,6 +12,8 @@ Install for Codex, Gemini CLI, and Claude Code on your computer:
 npx skills add rifqicode/my-ai-setup --skill my-ai-setup -g -a codex -a gemini-cli -a claude-code -y
 ```
 
+On first **project-specific planning use**, Orchestrator now runs the bundled [reader bootstrap](reader/start.mjs) to start/reuse the local browser reader. This requires Node.js/npm and terminal execution permission; `skills add` itself cannot launch it.
+
 The root [SKILL.md](SKILL.md) is the installable entry point; the five agent role specifications remain in [agents/](agents/). Check availability with `npx skills ls -g`. See [Installation & limitations](docs/installation.md) for requirements, update commands, and scope. **Installing a skill does not automatically spawn native subagents or install browser testing tools.**
 
 ## Team architecture
@@ -138,7 +140,7 @@ These are **portable role specifications** referenced by the installable root SK
 - [Local AI Planning Workspace architecture](docs/local-planning-workspace.md) — project-local live Markdown, inline comments, revision-bound approval, and a CLI-readable feedback sidecar. **A first local reader implementation now exists; see the setup guide.**
 - Existing [Docsify reader](docs/index.html) is a separate static documentation viewer for this setup repository, **not** the local interactive plan review app.
 
-- [Run the local reader](docs/local-reader-setup.md) — Node-based local browser UI with live Markdown, text-selection comments, and revision-aware approval. It requires a separate clone/npm install and is not yet end-to-end tested.
+- [Run the local reader](docs/local-reader-setup.md) — Node-based local browser UI with live Markdown, text-selection comments, and revision-aware approval. The skill now lazily boots the local reader on first project-planning use when terminal access is available. Initial npm dependencies install on demand; browser E2E remains unverified.
 
 ## Plan template & browser reader
 
@@ -152,7 +154,7 @@ These are **portable role specifications** referenced by the installable root SK
 
 ## Next design topics
 
-- Test and harden local-first reader/server with file watching, anchored comments and review status; add Mermaid rendering.
+- Test and harden first-use reader bootstrap and local server end-to-end, including Windows/WSL startup; add Mermaid rendering.
 - Wire explicit browser-feedback review into Orchestrator and verify across CLIs.
 
 - Implement and validate CLI adapters that locate the same canonical plan from any host.
