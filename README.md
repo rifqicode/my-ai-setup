@@ -12,8 +12,6 @@ Install for Codex, Gemini CLI, and Claude Code on your computer:
 npx skills add rifqicode/my-ai-setup --skill my-ai-setup -g -a codex -a gemini-cli -a claude-code -y
 ```
 
-On first **project-specific planning use**, Orchestrator now runs the bundled [reader bootstrap](reader/start.mjs) to start/reuse the local browser reader. This requires Node.js/npm and terminal execution permission; `skills add` itself cannot launch it.
-
 The root [SKILL.md](SKILL.md) is the installable entry point; the five agent role specifications remain in [agents/](agents/). Check availability with `npx skills ls -g`. See [Installation & limitations](docs/installation.md) for requirements, update commands, and scope. **Installing a skill does not automatically spawn native subagents or install browser testing tools.**
 
 ## Team architecture
@@ -135,18 +133,10 @@ These are **portable role specifications** referenced by the installable root SK
 
 - [Install and verify](docs/installation.md) — one-command global or project-local installation, platform requirements and limitations.
 
-## Local interactive planning workspace (beta MVP)
+## Technical Plan
 
-- [Local AI Planning Workspace architecture](docs/local-planning-workspace.md) — project-local live Markdown, inline comments, revision-bound approval, and a CLI-readable feedback sidecar. **A first local reader implementation now exists; see the setup guide.**
-- Existing [Docsify reader](docs/index.html) is a separate static documentation viewer for this setup repository, **not** the local interactive plan review app.
-
-- [Run the local reader](docs/local-reader-setup.md) — Node-based local browser UI with live Markdown, text-selection comments, and revision-aware approval. The skill now lazily boots the local reader on first project-planning use when terminal access is available. Initial npm dependencies install on demand; browser E2E remains unverified.
-
-## Plan template & browser reader
-
-- [Technical Implementation Plan template](templates/technical-implementation-plan.md) — one approved plan doubles as the agent task contract; per-task work status and verification stay separate.
-- [Cross-CLI plan storage convention](docs/plan-storage.md) — canonical project-root `.ai/plans/` directory, with optional CLI-specific linked views. This is a **design proposal**, not yet automated.
-- [Documentation reader source](docs/index.html) — browser-friendly Docsify reader for README, agent role specs, architecture, and template. To publish it, enable GitHub Pages with **Deploy from a branch: main, folder /docs** in repository Settings → Pages. The reader loads Markdown from this repository and requires internet connectivity; its hosted URL is not yet verified.
+- [Technical Implementation Plan template](templates/technical-implementation-plan.md) — an approved plan doubles as the task contract, with separate work and verification status.
+- [Cross-CLI plan storage convention](docs/plan-storage.md) — canonical project-root `.ai/plans/` directory, with optional CLI-specific linked views. This is a design proposal, not yet automated.
 
 ## Architecture documents
 
@@ -154,14 +144,8 @@ These are **portable role specifications** referenced by the installable root SK
 
 ## Next design topics
 
-- Test and harden first-use reader bootstrap and local server end-to-end, including Windows/WSL startup; add Mermaid rendering.
-- Wire explicit browser-feedback review into Orchestrator and verify across CLIs.
-
-- Implement and validate CLI adapters that locate the same canonical plan from any host.
-- Test the static reader in GitHub Pages after publication and secure private-project plan viewing separately.
-
-- Detail Orchestrator-to-agent handoffs and evidence format without introducing duplicate documents.
+- Implement and validate native CLI adapters that locate the same canonical plan.
+- Detail Orchestrator-to-agent handoffs and evidence format without duplicate documents.
 - Define safeguards for parallel execution and file ownership.
-- Determine completion criteria and escalation triggers for repeated failures.
-- Validate cross-CLI one-command installation and adapter behavior.
+- Validate cross-CLI one-command installation and delegation behavior.
 - Build a minimal cross-CLI proof of concept before calling the workflow operational.
