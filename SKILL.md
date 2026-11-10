@@ -49,3 +49,16 @@ A `SKILL.md` is **instruction packaging**, not a multi-agent runtime. Use native
 - No scope creep, unapproved irreversible actions, production deployment, or destructive testing.
 - Speak in the user's language and match their preferred brevity; reason through meaningful trade-offs and edge cases.
 - For simple questions, answer directly without forcing the entire agent workflow.
+
+
+## Local browser review (optional companion)
+
+The repository includes a beta local planning reader. It is a **separate Node process**, not installed automatically by Agent Skills. Follow [local reader setup](docs/local-reader-setup.md) to start it for the user's project.
+
+When the user asks you to process browser comments:
+1. Find the active canonical plan at `.ai/plans/<plan-id>.md` and read its review sidecar at `.ai/reviews/<plan-id>.json`.
+2. Review all `OPEN` comments, validate them against the current document and source code as needed, and discuss material changes.
+3. Revise the canonical plan if authorized; report which comments were addressed and which require a user decision.
+4. Do **not** silently rewrite approval or mark comments resolved on behalf of the user. The user controls review resolution and approval in the browser.
+
+The browser's approval is revision-bound. Treat an approved plan as stale whenever its content changes.
