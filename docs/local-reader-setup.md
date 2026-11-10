@@ -1,40 +1,35 @@
 # Local Planning Workspace — Run Guide (MVP)
 
-> Status: **Implemented beta; installation and browser E2E not yet verified on a user machine.**
-> This is a local interactive reader for *project plans*, distinct from the static Docsify site for this repository.
+> **Status: Beta; first-use bootstrap added, not yet browser E2E verified.** This is the project-local interactive reader, not the public Docsify site.
 
-## Start
+## Preferred setup: install skill once
 
-Requirements: Node.js 20+ and npm; existing Codex/Claude/Gemini is optional for viewing plans.
-
-First install the workflow skill using the [installation guide](installation.md). The Agent Skills installer **does not install the reader CLI**. To run the companion reader, clone this repository once:
+Requirements: Node.js 20+ with npm, and a CLI that supports Agent Skills (Codex, Gemini CLI or Claude Code).
 
 ```bash
-git clone https://github.com/rifqicode/my-ai-setup.git
-cd my-ai-setup
-npm install
+npx skills add rifqicode/my-ai-setup --skill my-ai-setup -g -a codex -a gemini-cli -a claude-code -y
 ```
 
-From the **target project root** (e.g. Ekatra), start the reader with the script from the cloned setup repository:
+Open your **target project**, start the supported AI CLI, invoke `my-ai-setup`, and ask it to brainstorm or prepare a plan. The skill now instructs Orchestrator to:
 
-**PowerShell (Windows):**
+1. Detect the current project root and execute its bundled `reader/start.mjs`.
+2. Reuse a running reader for the same project, or install reader npm dependencies on first use and launch it in the background.
+3. Open a browser best-effort and print the actual loopback URL.
+4. Save plans under `.ai/plans/`. The reader updates as those files change.
 
-```powershell
-cd C:\path\to\ekatra
-$env:AI_PROJECT_ROOT = (Get-Location).Path
-node C:\path\to\my-ai-setup\reader\server.mjs
-```
+**Important:** `npx skills add` only installs files. Lazy auto-start occurs **on first skill use** and only when AI CLI is permitted to run terminal commands. Initial dependency download requires a working npm connection. The browser is local-only and does not invoke AI automatically when comments are written.
 
-**bash (Linux/macOS/WSL):**
+## Fallback: start manually
+
+If the AI host cannot execute the bootstrap automatically, locate the installed skill directory containing `SKILL.md` and run:
 
 ```bash
-cd /path/to/ekatra
-AI_PROJECT_ROOT="$PWD" node /path/to/my-ai-setup/reader/server.mjs
+node "<installed-skill-directory>/reader/start.mjs" --project "<path-to-ekatra>"
 ```
 
-The server prints a URL similar to `http://127.0.0.1:4177/?token=...`. Open **the exact URL printed in your terminal** (required for review writes). It binds only to loopback; it does not expose plans to GitHub Pages.
+The bootstrap prints the live local URL; opening it manually is always supported. Use `--no-open` to avoid automatically launching a browser.
 
-Alternative when working in the *my-ai-setup repository* itself: `npm run docs` (reads that repo's own `.ai/plans/`, not Ekatra's).
+To debug startup failures interactively, start the server directly from the installed skill location (with dependencies installed), setting `AI_PROJECT_ROOT` to your target project. The default port is dynamically selected; `AI_DOCS_PORT` overrides it.
 
 ## Create a plan
 
@@ -79,7 +74,7 @@ The reader deliberately does **not** automatically wake or invoke an AI CLI. Com
 - Mermaid **is not rendered as an interactive diagram** in this MVP; fenced Mermaid source is shown as code. Diagram rendering is planned.
 - Text comments use exact selected quotes; anchors may become unmatched after substantial edits. Unmatched quotes are flagged instead of silently reattached.
 - No embedded AI chat, auto-dispatch, native subagent registration, or automatic Playwright installation.
-- This package requires a separate repository clone and npm install; the one-command Agent Skills install alone provides workflow instructions.
+- The skill invokes its bundled reader bootstrap on first project-planning use when terminal execution is allowed. First run downloads npm dependencies; offline first use requires dependencies to already exist.
 - Browser end-to-end testing has not yet been executed here due to unavailable package/network access. Do not treat it as production-hardened.
 - If the project contains confidential plans, do not expose the local server outside loopback, and review what belongs in source control.
 
