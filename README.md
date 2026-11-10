@@ -133,10 +133,12 @@ These are **portable role specifications** referenced by the installable root SK
 
 - [Install and verify](docs/installation.md) — one-command global or project-local installation, platform requirements and limitations.
 
-## Local interactive planning workspace (design v0.5)
+## Local interactive planning workspace (beta MVP)
 
-- [Local AI Planning Workspace architecture](docs/local-planning-workspace.md) — project-local live Markdown, inline comments, revision-bound approval, and a CLI-readable feedback sidecar. **This interactive local workspace is not yet implemented.**
+- [Local AI Planning Workspace architecture](docs/local-planning-workspace.md) — project-local live Markdown, inline comments, revision-bound approval, and a CLI-readable feedback sidecar. **A first local reader implementation now exists; see the setup guide.**
 - Existing [Docsify reader](docs/index.html) is a separate static documentation viewer for this setup repository, **not** the local interactive plan review app.
+
+- [Run the local reader](docs/local-reader-setup.md) — Node-based local browser UI with live Markdown, text-selection comments, and revision-aware approval. It requires a separate clone/npm install and is not yet end-to-end tested.
 
 ## Plan template & browser reader
 
@@ -150,7 +152,7 @@ These are **portable role specifications** referenced by the installable root SK
 
 ## Next design topics
 
-- Implement local-first reader/server with file watching, anchored comments and review status.
+- Test and harden local-first reader/server with file watching, anchored comments and review status; add Mermaid rendering.
 - Wire explicit browser-feedback review into Orchestrator and verify across CLIs.
 
 - Implement and validate CLI adapters that locate the same canonical plan from any host.
