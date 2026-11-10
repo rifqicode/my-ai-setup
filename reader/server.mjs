@@ -12,7 +12,7 @@ const root = path.resolve(process.env.AI_PROJECT_ROOT || process.cwd());
 const plansDir = path.join(root, '.ai', 'plans');
 const reviewsDir = path.join(root, '.ai', 'reviews');
 const publicDir = path.join(path.dirname(fileURLToPath(import.meta.url)), 'public');
-const port = Number(process.env.AI_DOCS_PORT || 4177);
+let port = Number(process.env.AI_DOCS_PORT || 0);
 const token = crypto.randomBytes(24).toString('hex');
 const clients = new Set();
 let writing = Promise.resolve();
@@ -98,6 +98,10 @@ export async function handler(req, res) {
   try {
     if (!isLocal(req)) return fail(res, 403, 'Localhost only');
     const url = new URL(req.url, 'http://127.0.0.1:' + port);
+    if (url.pathname === '/api/health' && req.method === 'GET') {
+      if (req.headers['x-workspace-token'] !== token) return fail(res, 403, 'Invalid token');
+      return send(res, 200, { ok:true, projectHash:digest(root) });
+    }
     if (url.pathname === '/' || url.pathname === '/index.html') return serveStatic(res, 'index.html');
     if (url.pathname === '/app.js' || url.pathname === '/style.css') return serveStatic(res, url.pathname.slice(1));
     if (url.pathname === '/api/events' && req.method === 'GET') {
@@ -168,10 +172,16 @@ async function start() {
     fs.watch(dir, (_type,name) => { if (name && /\.(md|json)$/.test(String(name))) notify('changed',String(name).replace(/\.(md|json)$/,'')); });
   }
   const server=http.createServer(handler);
-  server.listen(port,'127.0.0.1',()=>{
+  server.listen(port,'127.0.0.1',async()=>{
+    port = server.address().port;
+    const url = 'http://127.0.0.1:' + port + '/?token=' + token;
+    if (process.env.AI_READER_STATE_FILE) {
+      const state = { projectRoot:root, port, token, url, pid:process.pid };
+      await fsp.writeFile(process.env.AI_READER_STATE_FILE, JSON.stringify(state), { mode:0o600 });
+    }
     console.log('\nMy AI Setup — Local Planning Workspace');
     console.log('Project: ' + root);
-    console.log('Browser: http://127.0.0.1:' + port + '/?token=' + token);
+    console.log('Browser: ' + url);
     console.log('Plans: ' + plansDir + '\n');
   });
 }
