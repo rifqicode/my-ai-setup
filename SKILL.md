@@ -51,14 +51,22 @@ A `SKILL.md` is **instruction packaging**, not a multi-agent runtime. Use native
 - For simple questions, answer directly without forcing the entire agent workflow.
 
 
-## Local browser review (optional companion)
+## Local browser review — lazy auto-start
 
-The repository includes a beta local planning reader. It is a **separate Node process**, not installed automatically by Agent Skills. Follow [local reader setup](docs/local-reader-setup.md) to start it for the user's project.
+When this skill is invoked for **project-specific brainstorming, technical planning, or plan review**, start or reuse the local reader once per project, provided terminal execution is available.
+
+1. Determine the **target project root**. Use the active workspace root, not this skill's directory. Avoid starting the reader for a generic conceptual question without an active project.
+2. From the **installed skill directory** containing this SKILL.md, run its bundled bootstrap using the runtime path to this skill:
+   `node "<absolute-installed-skill-path>/reader/start.mjs" --project "<absolute-project-root>"`
+3. The bootstrap checks for an already-running reader, installs Node dependencies on first use only when missing, and launches a loopback-only server. It prints the project-specific browser URL. Browser opening is best-effort; present the URL if the environment cannot open the browser.
+4. Do not claim the reader started if the command failed or was not run. If terminal execution is restricted, explain the limitation and continue planning in Markdown.
+5. Save the plan to `.ai/plans/<plan-id>.md` in the target project. The browser will show changes automatically while its server runs.
+6. Comments in `.ai/reviews/<plan-id>.json` remain **passive feedback**; the reader never auto-executes commands or invokes AI just because a comment was saved.
 
 When the user asks you to process browser comments:
-1. Find the active canonical plan at `.ai/plans/<plan-id>.md` and read its review sidecar at `.ai/reviews/<plan-id>.json`.
-2. Review all `OPEN` comments, validate them against the current document and source code as needed, and discuss material changes.
-3. Revise the canonical plan if authorized; report which comments were addressed and which require a user decision.
-4. Do **not** silently rewrite approval or mark comments resolved on behalf of the user. The user controls review resolution and approval in the browser.
+1. Read the active plan in `.ai/plans/` and its review JSON in `.ai/reviews/`.
+2. Analyze `OPEN` comments and discuss material design changes.
+3. Revise the canonical plan if authorized, and report the disposition of comments.
+4. Do **not** mark comments resolved or alter browser approval without the user's authorization.
 
-The browser's approval is revision-bound. Treat an approved plan as stale whenever its content changes.
+The `npx skills add` installer **cannot itself launch persistent services**. Lazy auto-start requires this skill to be invoked with permission to run terminal commands and Node.js/npm present. See [local reader setup](docs/local-reader-setup.md).
