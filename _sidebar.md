@@ -7,6 +7,7 @@
   - [Handoff & Execution](docs/agent-handoff-and-execution.md)
   - [Plan Storage & Portability](docs/plan-storage.md)
   - [Local Planning Workspace](docs/local-planning-workspace.md)
+  - [Run Local Reader](docs/local-reader-setup.md)
 
 - **Agents**
   - [Orchestrator](agents/orchestrator.md)
