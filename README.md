@@ -89,18 +89,18 @@ Not every task needs every specialist; orchestration adapts to the complexity an
 - **Honest evidence:** Do not claim isolated agents, parallelism, tool execution, or QA checks that did not actually occur.
 - **Installability:** Target a one-command installation; host-specific adapters and install mechanics are not yet built.
 
-## Proposed repository structure (not yet implemented)
+## Repository structure (role specifications available; installer not yet implemented)
 
 ```text
 my-ai-setup/
 ├── README.md
-├── SKILL.md
+├── SKILL.md                   # planned, not implemented
 ├── agents/
-│   ├── orchestrator.md
-│   ├── researcher.md
-│   ├── coder.md
-│   ├── test-writer.md
-│   └── qa.md
+│   ├── orchestrator.md        # draft role spec
+│   ├── researcher.md          # draft role spec
+│   ├── coder.md               # draft role spec
+│   ├── test-writer.md         # draft role spec
+│   └── qa.md                  # draft role spec
 ├── workflows/
 │   └── development.md
 └── adapters/
@@ -108,6 +108,16 @@ my-ai-setup/
     ├── gemini/
     └── claude/
 ```
+
+## Agent role specifications
+
+- [Orchestrator](agents/orchestrator.md) — user-facing Technical Lead, canonical plan, delegation, triage and reporting.
+- [Researcher](agents/researcher.md) — read-only, evidence-backed codebase investigation.
+- [Coder](agents/coder.md) — scoped implementation and self-verification.
+- [Test Writer](agents/test-writer.md) — automated test design, edge-case coverage and execution evidence.
+- [QA](agents/qa.md) — independent real-application validation and defect evidence.
+
+These are **portable draft specifications**, not yet native agents or installed skills. Adapter wiring and a runnable SKILL.md remain future work.
 
 ## Architecture documents
 
