@@ -6,6 +6,7 @@
   - [Home](/)
   - [Handoff & Execution](docs/agent-handoff-and-execution.md)
   - [Plan Storage & Portability](docs/plan-storage.md)
+  - [Local Planning Workspace](docs/local-planning-workspace.md)
 
 - **Agents**
   - [Orchestrator](agents/orchestrator.md)
