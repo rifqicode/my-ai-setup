@@ -1,8 +1,18 @@
 # My AI Setup
 
-> **Status: Architecture Draft — not yet installable.**
+> **Status: Installable orchestration skill (beta).** Native subagent adapters and runtime verification are still pending.
 
 Portable AI development team workflow intended for Codex CLI, Gemini CLI, and Claude Code. The goal is a single GitHub-hosted source of truth, eventually installable on a new computer with one command.
+
+## Quick start
+
+Install for Codex, Gemini CLI, and Claude Code on your computer:
+
+```bash
+npx skills add rifqicode/my-ai-setup --skill my-ai-setup -g -a codex -a gemini-cli -a claude-code -y
+```
+
+The root [SKILL.md](SKILL.md) is the installable entry point; the five agent role specifications remain in [agents/](agents/). Check availability with `npx skills ls -g`. See [Installation & limitations](docs/installation.md) for requirements, update commands, and scope. **Installing a skill does not automatically spawn native subagents or install browser testing tools.**
 
 ## Team architecture
 
@@ -89,12 +99,12 @@ Not every task needs every specialist; orchestration adapts to the complexity an
 - **Honest evidence:** Do not claim isolated agents, parallelism, tool execution, or QA checks that did not actually occur.
 - **Installability:** Target a one-command installation; host-specific adapters and install mechanics are not yet built.
 
-## Repository structure (role specifications available; installer not yet implemented)
+## Repository structure (installable skill; native agent adapters planned)
 
 ```text
 my-ai-setup/
 ├── README.md
-├── SKILL.md                   # planned, not implemented
+├── SKILL.md                   # installable root skill
 ├── agents/
 │   ├── orchestrator.md        # draft role spec
 │   ├── researcher.md          # draft role spec
@@ -117,7 +127,11 @@ my-ai-setup/
 - [Test Writer](agents/test-writer.md) — automated test design, edge-case coverage and execution evidence.
 - [QA](agents/qa.md) — independent real-application validation and defect evidence.
 
-These are **portable draft specifications**, not yet native agents or installed skills. Adapter wiring and a runnable SKILL.md remain future work.
+These are **portable role specifications** referenced by the installable root SKILL.md. Native subagent wiring remains future work.
+
+## Installation
+
+- [Install and verify](docs/installation.md) — one-command global or project-local installation, platform requirements and limitations.
 
 ## Plan template & browser reader
 
