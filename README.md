@@ -119,11 +119,20 @@ my-ai-setup/
 
 These are **portable draft specifications**, not yet native agents or installed skills. Adapter wiring and a runnable SKILL.md remain future work.
 
+## Plan template & browser reader
+
+- [Technical Implementation Plan template](templates/technical-implementation-plan.md) — one approved plan doubles as the agent task contract; per-task work status and verification stay separate.
+- [Cross-CLI plan storage convention](docs/plan-storage.md) — canonical project-root `.ai/plans/` directory, with optional CLI-specific linked views. This is a **design proposal**, not yet automated.
+- [Documentation reader source](docs/index.html) — browser-friendly Docsify reader for README, agent role specs, architecture, and template. To publish it, enable GitHub Pages with **Deploy from a branch: main, folder /docs** in repository Settings → Pages. The reader loads Markdown from this repository and requires internet connectivity; its hosted URL is not yet verified.
+
 ## Architecture documents
 
 - [Agent Handoff & Execution (v0.4)](docs/agent-handoff-and-execution.md) — delegation, parallel execution rules, progress tracking, integration and QA gates.
 
 ## Next design topics
+
+- Implement and validate CLI adapters that locate the same canonical plan from any host.
+- Test the static reader in GitHub Pages after publication and secure private-project plan viewing separately.
 
 - Detail Orchestrator-to-agent handoffs and evidence format without introducing duplicate documents.
 - Define safeguards for parallel execution and file ownership.
