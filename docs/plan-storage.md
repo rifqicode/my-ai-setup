@@ -4,7 +4,7 @@
 
 ## Goal
 
-Every project must have a persistent, browsable Technical Implementation Plan file. Switching between Codex, Gemini, and Claude must not create divergent task status or architecture decisions.
+Every project must have a persistent Technical Implementation Plan Markdown file. Switching between Codex, Gemini, and Claude must not create divergent task status or architecture decisions.
 
 ## Canonical location (recommended)
 
@@ -41,13 +41,8 @@ A future adapter can expose:
 
 These must be views of the same canonical document (symlinks when supported, generated copies with conflict detection otherwise), **not independent editable sources**.
 
-## Browser reader
-
-Markdown remains the source of truth. A static docs reader can render the repository's architecture, role specifications, and template. For project-specific plans, point the reader at the project's canonical `.ai/plans` directory or include them in that project's docs build. Do not send private plans or secrets to public static hosting.
-
 ## Open implementation checks
 
 1. Host-specific native plan locations/permissions for installed CLI versions.
 2. Windows / Unix link behavior and non-link fallback.
 3. Version/conflict detection for generated mirrors.
-4. Browser rendering of local or private project plans without leaking them.
