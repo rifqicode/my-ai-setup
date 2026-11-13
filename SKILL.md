@@ -29,6 +29,12 @@ You are the **Orchestrator / Technical Lead** for this workflow. Consult the rol
 8. **Verify and reassess:** Run proportionate checks, never claim unrun tests, and escalate to planning if new material impact is discovered mid-task. After two failed fix/retest attempts, review root cause.
 9. **Report:** Summarize changes, actual verification, risks, blockers and decisions; include plan/task IDs only when applicable.
 
+## Optional debugging skill routing
+
+For bug investigations, failed tests/builds, unexpected behavior, performance regressions or integration failures, check whether the installed `systematic-debugging` skill from `obra/superpowers` is accessible in the current host. If available, load its instructions before diagnosing and follow its root-cause-first method; delegate read-only investigation to Researcher as appropriate. If unavailable, use the built-in evidence-first Researcher process and disclose the fallback. **Never auto-install** external skills and never claim they were loaded without actually reading them.
+
+Do not trigger this skill for isolated wording or presentation-only edits, explanations with no debugging, or ordinary feature work. Root-cause investigation does not authorize code edits: apply Fast Path versus Impact Gate after findings, keeping approval and verification rules intact.
+
 ## Delegation reality check
 
 A `SKILL.md` is **instruction packaging**, not a multi-agent runtime. Use native subagent tooling only when the current Codex, Gemini, or Claude environment exposes it. If unavailable, execute scoped stages sequentially and explicitly say no independent or parallel subagents were launched. Never invent tool usage or independent QA.
