@@ -1,18 +1,18 @@
 # Optional external integrations
 
-This installer is separate from `npx skills add rifqicode/my-ai-setup -g`. Installing the core skill **does not execute** any external setup.
+This installer is separate from `npx skills add rifqicode/qark -g`. Installing the core skill **does not execute** any external setup.
 
 ## Usage
 
 Requires Node.js 18+ for the setup script.
 
 ```bash
-node ~/.agents/skills/my-ai-setup/integrations/setup.mjs --dry-run
-node ~/.agents/skills/my-ai-setup/integrations/setup.mjs --only caveman --yes
-node ~/.agents/skills/my-ai-setup/integrations/setup.mjs --only systematic-debugging
-node ~/.agents/skills/my-ai-setup/integrations/setup.mjs --only rtk --agent codex
-node ~/.agents/skills/my-ai-setup/integrations/setup.mjs --only rtk --agent all --yes
-node ~/.agents/skills/my-ai-setup/integrations/setup.mjs --skip caveman
+node ~/.agents/skills/qark/integrations/setup.mjs --dry-run
+node ~/.agents/skills/qark/integrations/setup.mjs --only caveman --yes
+node ~/.agents/skills/qark/integrations/setup.mjs --only systematic-debugging
+node ~/.agents/skills/qark/integrations/setup.mjs --only rtk --agent codex
+node ~/.agents/skills/qark/integrations/setup.mjs --only rtk --agent all --yes
+node ~/.agents/skills/qark/integrations/setup.mjs --skip caveman
 ```
 
 Relative skill paths can vary across hosts; point Node at the actual installed `integrations/setup.mjs`.
@@ -29,7 +29,7 @@ Relative skill paths can vary across hosts; point Node at the actual installed `
 - RTK init may change existing agent hooks/config. Back up those files first and inspect upstream uninstall instructions; this script does not automatically undo modifications.
 - `--agent all` targets Claude, Codex and Antigravity regardless of which are installed; prefer `--agent codex`, etc. when only one is needed.
 - For raw unfiltered output when investigating failures, use `rtk bypass <command...>` or your original CLI directly when appropriate.
-- Caveman and Systematic Debugging must not override my-ai-setup's acceptance criteria, scope/approval gates, critical decisions, or QA evidence. Skill presence does not guarantee auto-loading across all agent runtimes. This package does not automatically apply its speaking style.
+- Caveman and Systematic Debugging must not override qark's acceptance criteria, scope/approval gates, critical decisions, or QA evidence. Skill presence does not guarantee auto-loading across all agent runtimes. This package does not automatically apply its speaking style.
 
 ## Verification
 
