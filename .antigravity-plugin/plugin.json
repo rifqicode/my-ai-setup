@@ -1,6 +1,6 @@
 {
-  "name": "my-ai-setup",
-  "displayName": "My AI Setup",
+  "name": "qark",
+  "displayName": "Qark",
   "version": "0.2.0",
   "description": "Impact-driven AI development workflow",
   "category": "Developer Tools",
@@ -13,8 +13,8 @@
   "author": {
     "name": "rifqicode"
   },
-  "homepage": "https://github.com/rifqicode/my-ai-setup",
-  "repository": "https://github.com/rifqicode/my-ai-setup",
+  "homepage": "https://github.com/rifqicode/qark",
+  "repository": "https://github.com/rifqicode/qark",
   "license": "UNLICENSED",
   "suggestedPrompts": [
     "Fix this wording issue with minimal changes",
