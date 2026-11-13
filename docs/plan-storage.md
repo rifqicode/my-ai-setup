@@ -4,11 +4,11 @@
 
 ## Goal
 
-Every project must have a persistent Technical Implementation Plan Markdown file. Switching between Codex, Gemini, and Claude must not create divergent task status or architecture decisions.
+Materially impactful implementation requires one persistent Technical Implementation Plan Markdown file in the target project. Fast Path changes and read-only requests do not require one. Switching between Codex, Gemini, and Claude must not create divergent task status or architecture decisions.
 
 ## Canonical location (recommended)
 
-Use the **target project root**:
+When the Impact Gate requires a plan, use the **target project root**:
 
 ```text
 example-project/
@@ -28,8 +28,8 @@ example-project/
 - One plan, one canonical path. Do **not** allow three agents to separately write three different copies.
 - Each CLI adapter receives the same absolute resolved project path at runtime (derived from workspace; **not** hardcoded into Git).
 - If the host insists on writing under its own plans directory, the adapter must reconcile/merge to canonical through Orchestrator before the plan is considered current. Prefer links over copies when practical.
-- A plan is project state and **should be committed to the target repository** (unless sensitive information makes a private location more appropriate).
-- Orchestrator is the single writer of status/decision updates; specialists only return findings.
+- A required plan is project state and **should be committed to the target repository** (unless sensitive information makes a private location more appropriate). Do not create placeholder plans for Fast Path.
+- Orchestrator is the single writer of plan status/decision updates when a plan exists. Fast Path progress and evidence may be reported directly; specialists only return findings.
 - Plan ID/version identifies all handoffs. Do not overwrite approved decisions silently.
 
 ## If per-CLI root storage is mandatory

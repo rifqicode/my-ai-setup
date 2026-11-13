@@ -4,26 +4,26 @@
 
 ## 1. Goal
 
-Coordinate five portable roles (Orchestrator, Researcher, Coder, Test Writer, QA) using one approved **Technical Implementation Plan** as the source of truth. Minimize redundant documents, conflicting edits, unverified completion claims, and uncontrolled rework.
+Coordinate five portable roles (Orchestrator, Researcher, Coder, Test Writer, QA) using **Impact-Driven Planning**: low-impact authorized tasks take Fast Path without a plan, while material changes use one approved **Technical Implementation Plan** as the source of truth. Minimize redundant documents, conflicting edits, unverified completion claims, and uncontrolled rework.
 
 ## 2. Control plane and execution plane
 
 - **Orchestrator is the control plane.** Owns user communication, research requests, plan approval, task assignment, dependency ordering, result aggregation, tracking, triage, and final reporting.
-- **Specialists are the execution plane.** Receive a bounded assignment identified by a task ID *in the Technical Plan*; report progress and evidence, but do not amend approved scope or approve their own work.
+- **Specialists are the execution plane.** Receive a bounded assignment identified by a task ID *in the Technical Plan* for planned work, or a concise scoped instruction for Fast Path; report progress and evidence, but do not amend approved scope or approve their own work.
 - **Researcher is read-only.** May be invoked before planning or again during triage when further codebase investigation is necessary.
 - **QA is independent of implementation.** Validates running behavior and reports defects, not silent production-code fixes.
 - **Human is the decision authority** for materially altered scope, major architecture changes, risky irreversible operations, and final release authorization where applicable.
 
 ## 3. Handoff protocol (no extra Task Contract document)
 
-The Orchestrator points the agent to the **approved plan version and assigned task IDs**. The assignment also states relevant dependencies and current execution context. These are references to the plan, not a second competing specification.
+For planned work, the Orchestrator points the agent to the **approved plan version and assigned task IDs**. Fast Path uses a concise instruction covering scope, allowed action and expected verification, without inventing plan IDs. Neither approach creates a competing specification.
 
 Each handoff identifies:
 
 | Field | Meaning |
 | --- | --- |
-| Plan reference/version | Which agreed plan to follow |
-| Task IDs and owner | Exact work to perform |
+| Plan reference/version | Which agreed plan to follow, if applicable |
+| Task IDs and owner | Exact planned work; IDs optional on Fast Path |
 | Dependencies | What must be complete or available |
 | Scope boundaries | Modules/files allowed and forbidden when known |
 | Acceptance criteria | Relevant requirements in the plan |
@@ -34,7 +34,7 @@ Each agent reports back:
 
 | Field | Meaning |
 | --- | --- |
-| Task ID | Link to the agreed plan |
+| Task ID | Link to plan when applicable, otherwise Fast Path request |
 | Work status | TODO / IN_PROGRESS / BLOCKED / DONE / SKIPPED |
 | Result summary | What actually changed or was investigated |
 | Evidence | File references, diffs, test commands/results, logs, screenshots, or repro steps |
@@ -44,32 +44,34 @@ Each agent reports back:
 
 **No evidence means no verified claim.** Do not report tests as passed unless they were executed and results observed.
 
-## 4. Execution sequence
+## 4. Execution sequence — Impact-Driven Planning
 
 ```mermaid
 flowchart TD
-    U[User: requirement] --> O[Orchestrator: discuss]
-    O -->|when codebase context needed| R[Researcher: inspect codebase]
-    R -->|grounded findings| O
-    O --> P[Technical Implementation Plan]
-    P --> A{Major decisions approved?}
-    A -- No --> U
-    A -- Yes --> S{Safe parallel execution?}
-    S -- Yes --> C[Coder: scoped implementation]
-    S -- Yes --> T[Test Writer: scoped tests]
-    S -- No --> E[Sequential role-scoped tasks]
-    C --> I[Integration gate]
-    T --> I
-    E --> I
-    I --> Q[QA: runtime validation]
-    Q --> F{Findings or blockers?}
-    F -- Fix code --> C
-    F -- Fix tests --> T
-    F -- Investigate --> R
-    F -- Scope/design decision --> U
-    F -- No material issues --> X[Orchestrator: consolidated report]
+    U[User request] --> O[Identify intent and assess impact]
+    O -->|Read-only request| D[Research or answer; no edits]
+    O -->|Low impact and authorized| F[Fast Path: direct scoped execution]
+    O -->|Impact uncertain| R[Targeted read-only research]
+    R --> G{Material impact?}
+    G -->|No| F
+    G -->|Yes| P[Canonical Technical Plan]
+    O -->|Material impact| P
+    P --> A{User approval?}
+    A -->|No| U
+    A -->|Yes| E[Delegate approved implementation]
+    F --> V[Proportional verification]
+    E --> V
+    V --> K{New material impact?}
+    K -->|Yes: pause affected work| P
+    K -->|No| Q[Applicable QA and evidence report]
+    D --> X[Report]
+    Q --> X
     X --> U
 ```
+
+**Fast Path:** An explicit implementation request, known isolated low-impact change, reversible outcome, and no material effects on business rules/flow, data integrity, security/permissions, API/schema contracts or architecture. An existing complex codebase alone is not reason to create a plan.
+
+**Impact Gate:** If research or execution reveals material impact, pause the affected change and create a Technical Plan with user approval before continuing. Favor a display-only label change over modifying an internal status enum when it meets the user's intent. Do not silently expand scope. Production deployment, destructive actions and irreversible operations always retain their separate authorization requirements.
 
 The diagram is conceptual. Host CLI support dictates whether genuine subagents or isolated environments are available.
 
@@ -101,7 +103,7 @@ Parallel work is not considered integrated until combined changes are checked fo
 **Verification statuses:** NOT_RUN, PASS, FAIL, BLOCKED.
 
 - Agent updates on meaningful transitions: started, completed, blocked, and retest.
-- Orchestrator alone consolidates task statuses into the Technical Plan to avoid write races.
+- Orchestrator alone consolidates task statuses into the Technical Plan when one exists; Fast Path may be reported directly.
 - A Coder task may be DONE with verification NOT_RUN; it does **not** mean the feature is QA-approved.
 - QA may finish its assigned validation task (DONE) while reporting verification FAIL and defects.
 - A BLOCKED item includes reason and an owner/action to unblock.
@@ -123,7 +125,7 @@ Before QA, Orchestrator confirms a testable combined state and reports:
 - Checks actually run (e.g., lint, typecheck, unit/integration tests, build).
 - Known failures, missing checks, tool limitations, and the exact test target/environment.
 
-QA validates against the **approved plan**, not just assertions made by Coder or Test Writer. Where supported, QA uses Playwright/browser/CLI and captures enough evidence to reproduce a defect. When the required environment or tool is unavailable, report verification BLOCKED or NOT_RUN rather than PASS.
+QA validates against the **approved plan where one exists**, or explicitly requested Fast Path behavior, not just assertions made by Coder or Test Writer. Where supported, QA uses Playwright/browser/CLI and captures enough evidence to reproduce a defect. When the required environment or tool is unavailable, report verification BLOCKED or NOT_RUN rather than PASS.
 
 ## 8. Finding and rework routing
 
@@ -144,7 +146,7 @@ Avoid endless retry loops. **After two failed fix/retest attempts on the same fi
 ## 9. Orchestrator final report
 
 For each scoped deliverable, communicate:
-- Implemented work and its linked plan task IDs.
+- Implemented work and its linked plan task IDs, if applicable.
 - Agent progress with work status and verification status separately.
 - Actually executed checks and QA evidence.
 - Remaining defects, risks, skipped work, and blockers.
