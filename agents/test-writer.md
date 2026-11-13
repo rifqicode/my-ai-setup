@@ -1,3 +1,11 @@
+---
+name: test-writer
+description: Builds automated tests and edge-case coverage for approved scoped implementation tasks.
+mainAgent: false
+subagent: true
+model: inherit
+---
+
 # Test Writer Agent — Role Specification v0.1
 
 > Status: Draft. Automated test design and implementation specialist.
