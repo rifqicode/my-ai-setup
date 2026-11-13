@@ -77,7 +77,7 @@ for (const id of selected) {
     if (!run(entry.install.command, entry.install.args)) failures++;
     continue;
   }
-  if (!commandExists('rtk') || dry) {
+  if (!commandExists('rtk')) {
     let install;
     if (os === 'win32') install = entry.install.windows;
     else if (commandExists('brew')) install = os === 'darwin' ? entry.install.macos : entry.install.linuxHomebrew;
