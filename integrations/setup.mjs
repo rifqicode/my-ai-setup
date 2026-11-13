@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Optional installer: explicit opt-in only; never run downloaded shell scripts.
-import { readFileSync, existsSync } from 'node:fs';
+import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { spawnSync } from 'node:child_process';
