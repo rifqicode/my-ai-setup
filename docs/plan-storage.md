@@ -24,7 +24,7 @@ example-project/
 └── src/
 ```
 
-- `my-ai-setup` is the **global/shared workflow specification**; it is not the home for project-specific plans.
+- `qark` is the **global/shared workflow specification**; it is not the home for project-specific plans.
 - One plan, one canonical path. Do **not** allow three agents to separately write three different copies.
 - Each CLI adapter receives the same absolute resolved project path at runtime (derived from workspace; **not** hardcoded into Git).
 - If the host insists on writing under its own plans directory, the adapter must reconcile/merge to canonical through Orchestrator before the plan is considered current. Prefer links over copies when practical.

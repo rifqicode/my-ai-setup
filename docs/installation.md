@@ -1,11 +1,11 @@
-# Install My AI Setup
+# Install Qark
 
 The repository now contains a root [SKILL.md](../SKILL.md), so it can be discovered by installers that support the Agent Skills format. The skill includes role instructions and references to the Technical Plan template, architecture and plan-storage policy.
 
 ## Requirements
 
 - Node.js **22.20+** and npm/npx for the current `skills` CLI.
-- At least one installed and authenticated AI CLI (Codex, Gemini CLI, Claude Code).
+- At least one installed and authenticated AI CLI (Codex, Antigravity, Claude Code).
 - Git accessible from the terminal; authentication is required if this repository becomes private.
 
 ## Install globally (recommended)
@@ -13,7 +13,7 @@ The repository now contains a root [SKILL.md](../SKILL.md), so it can be discove
 Run from **any directory**:
 
 ```bash
-npx skills add rifqicode/my-ai-setup --skill my-ai-setup -g -a codex -a gemini-cli -a claude-code -y
+npx skills add rifqicode/qark --skill qark -g -a codex -y
 ```
 
 - `-g`: install user-wide so the workflow is available in different projects.
@@ -23,7 +23,7 @@ npx skills add rifqicode/my-ai-setup --skill my-ai-setup -g -a codex -a gemini-c
 For one tool only:
 
 ```bash
-npx skills add rifqicode/my-ai-setup --skill my-ai-setup -g -a codex -y
+npx skills add rifqicode/qark --skill qark -g -a codex -y
 ```
 
 **Project-local instead:** omit `-g` while inside the project root. This installs skill files into that project's agent skill paths.
@@ -34,11 +34,11 @@ npx skills add rifqicode/my-ai-setup --skill my-ai-setup -g -a codex -y
 npx skills ls -g
 ```
 
-Look for `my-ai-setup`. Start/restart the corresponding CLI if the skill isn't recognized immediately. In Codex use its skill selector (`/skills` or `$my-ai-setup` where supported). In Gemini use `/skills list` and `/skills reload`. Claude Code discovers installed skills from its skill directories.
+Look for `qark`. Start/restart the corresponding CLI if the skill isn't recognized immediately. In Codex use its skill selector (`/skills` or `$qark` where supported). In Antigravity use the native plugin manager. Claude Code discovers installed skills from its skill directories.
 
 Example request:
 
-> Use my-ai-setup to research the existing order flow, discuss the risks with me, and prepare a Technical Implementation Plan. Do not implement anything until I approve the plan.
+> Use qark to research the existing order flow, discuss the risks with me, and prepare a Technical Implementation Plan. Do not implement anything until I approve the plan.
 
 ## Project plan location
 
@@ -52,7 +52,7 @@ your-project/
 └── src/
 ```
 
-The Orchestrator creates and maintains the canonical plan in `.ai/plans/`. Codex, Gemini, and Claude should all target that one file. CLI-specific copies are not automatically synchronized by this skill version.
+The Orchestrator creates and maintains the canonical plan in `.ai/plans/`. Codex, Antigravity, and Claude should all target that one file. CLI-specific copies are not automatically synchronized by this skill version.
 
 ## Update
 
@@ -61,7 +61,7 @@ npx skills check
 npx skills update -g
 ```
 
-If updating by name is needed, use `npx skills update my-ai-setup -g`.
+If updating by name is needed, use `npx skills update qark -g`.
 
 ## Important limitation
 
@@ -73,5 +73,5 @@ No Playwright, browser, test runner, MCP server, or extra dependency is automati
 
 - Agent Skills CLI: https://github.com/vercel-labs/skills/blob/main/docs/commands.md
 - Codex Agent Skills: https://learn.chatgpt.com/docs/build-skills
-- Gemini CLI Agent Skills: https://github.com/google-gemini/gemini-cli/blob/main/docs/cli/using-agent-skills.md
+- Antigravity: https://github.com/obra/superpowers#antigravity
 - Claude skills: https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview

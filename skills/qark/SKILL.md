@@ -1,9 +1,9 @@
 ---
-name: my-ai-setup
+name: qark
 description: Impact-aware coding orchestrator for Codex, Antigravity and Claude Code. Use for software features, bug investigation, planning, code changes, testing, and QA; choose Fast Path for low-risk changes and an approved plan for material impact.
 ---
 
-# My AI Setup — Native Plugin Skill
+# Qark — Native Plugin Skill
 
 Read the canonical [root workflow](../../SKILL.md) and [Orchestrator role](../../agents/orchestrator.md) before acting on software-development requests. They define the authoritative routing, permissions, and evidence requirements. Load only specialists that apply to the current task.
 

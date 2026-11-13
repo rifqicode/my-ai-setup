@@ -1,12 +1,12 @@
 {
-  "name": "my-ai-setup",
+  "name": "qark",
   "version": "0.2.0",
   "description": "Impact-driven orchestration with optional debugging skill routing",
   "author": {
     "name": "rifqicode"
   },
-  "homepage": "https://github.com/rifqicode/my-ai-setup",
-  "repository": "https://github.com/rifqicode/my-ai-setup",
+  "homepage": "https://github.com/rifqicode/qark",
+  "repository": "https://github.com/rifqicode/qark",
   "license": "UNLICENSED",
   "keywords": [
     "orchestration",
