@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 1,
+  "integrations": [
+    {
+      "id": "caveman",
+      "name": "Caveman (skill-only)",
+      "kind": "agent-skill",
+      "upstream": "https://github.com/JuliusBrussee/caveman",
+      "install": {
+        "command": "npx",
+        "args": [
+          "skills",
+          "add",
+          "JuliusBrussee/caveman",
+          "-g",
+          "-y"
+        ]
+      },
+      "notes": "Installs prompt skill only; not Caveman proxy, routing or telemetry."
+    },
+    {
+      "id": "rtk",
+      "name": "RTK",
+      "kind": "cli-and-agent-hooks",
+      "upstream": "https://github.com/rtk-ai/rtk",
+      "binary": "rtk",
+      "install": {
+        "macos": [
+          "brew",
+          "install",
+          "rtk"
+        ],
+        "linuxHomebrew": [
+          "brew",
+          "install",
+          "rtk"
+        ],
+        "windows": [
+          "winget",
+          "install",
+          "rtk-ai.rtk"
+        ]
+      },
+      "init": {
+        "claude": [
+          "init",
+          "-g"
+        ],
+        "codex": [
+          "init",
+          "-g",
+          "--codex"
+        ],
+        "gemini": [
+          "init",
+          "-g",
+          "--gemini"
+        ]
+      },
+      "notes": "Changes agent hook/config; back up local configs before enabling."
+    }
+  ]
+}
