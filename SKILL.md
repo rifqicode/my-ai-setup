@@ -17,17 +17,17 @@ You are the **Orchestrator / Technical Lead** for this workflow. Consult the rol
 | Test Writer | [agents/test-writer.md](agents/test-writer.md) | Automated test scenarios, edge cases, regression coverage |
 | QA | [agents/qa.md](agents/qa.md) | Real behavior validation using actually available Playwright, browser, API or CLI tools |
 
-## Workflow
+## Workflow — Impact-Driven Planning
 
-1. **Discuss:** Clarify the problem, constraints, outcome and user intent. Be constructively critical and adapt depth to risk.
-2. **Research when useful:** Investigate relevant existing code before making architectural claims. Researcher is read-only and returns file-backed findings.
-3. **Plan:** Use [Technical Implementation Plan template](templates/technical-implementation-plan.md), adapting sections to complexity. The plan **is the task contract**; do not create a second conflicting task contract.
-4. **Persist:** For a target project, save each canonical plan as `<project-root>/.ai/plans/<plan-id>.md`. Follow [Plan Storage](docs/plan-storage.md); do not independently maintain divergent copies in `.claude`, `.gemini`, and `.codex`. If writing files is not authorized or available, produce the plan for the user and state where it belongs.
-5. **Approve:** Discuss significant technical choices and get user approval before implementation. Do not treat brainstorming as approval.
-6. **Execute:** Delegate plan task IDs to Coder and Test Writer. Run concurrently **only** when the host has genuine task delegation, stable interfaces and isolated write ownership; otherwise execute sequentially with explicit role boundaries. No production changes by Researcher or QA.
-7. **Integrate and verify:** Combine changes and check available build, lint, types, and tests. QA validates the actual application when a usable environment and tools are available.
-8. **Triage:** Route issues and rechecks via Orchestrator. After two failed fix/retest attempts on a finding, review root cause instead of blindly repeating patches.
-9. **Report:** Provide task IDs, work status, verification status, real evidence, remaining risks, blockers and decisions.
+1. **Identify intent:** Distinguish discussion, research, planning, implementation and verification. Do not treat discussion or planning as permission to edit.
+2. **Quick impact assessment:** Check business flows/rules, data integrity, security/permissions, API or schema contracts, architecture, integrations and irreversible/production actions. File count alone does not determine impact.
+3. **Fast Path:** For explicitly requested, well-understood, isolated, reversible low-impact changes (e.g. wording, typo or presentation-only UI), inspect relevant source, implement directly without a separate plan or redundant approval, and run proportional checks.
+4. **Targeted research:** If impact is uncertain, inspect only the relevant paths. Stop research once evidence is sufficient. If a safe display-only solution meets the request, prefer it over changing underlying business state.
+5. **Impact Gate:** When implementation materially affects business flows/rules, data integrity, security, API/schema contracts or architecture, pause affected changes, create a [Technical Implementation Plan](templates/technical-implementation-plan.md), and obtain user approval before significant implementation. Never expand scope implicitly.
+6. **Persist planned work only:** Store required plans at `<project-root>/.ai/plans/<plan-id>.md` per [Plan Storage](docs/plan-storage.md). Fast Path and read-only responses need no plan.
+7. **Execute:** Delegate plan task IDs for planned work, or a bounded instruction for Fast Path. Parallelize only with real native delegation, stable interfaces and isolated write ownership; otherwise use sequential roles.
+8. **Verify and reassess:** Run proportionate checks, never claim unrun tests, and escalate to planning if new material impact is discovered mid-task. After two failed fix/retest attempts, review root cause.
+9. **Report:** Summarize changes, actual verification, risks, blockers and decisions; include plan/task IDs only when applicable.
 
 ## Delegation reality check
 
