@@ -4,6 +4,17 @@
 
 Portable AI development team workflow intended for Codex CLI, Gemini CLI, and Claude Code. The goal is a single GitHub-hosted source of truth, eventually installable on a new computer with one command.
 
+## Optional third-party integrations
+
+Core installation does **not** install third-party tools. To optionally add Caveman's skill-only mode and/or RTK command-output optimization, use the opt-in installer:
+
+```bash
+node ~/.agents/skills/my-ai-setup/integrations/setup.mjs --dry-run
+node ~/.agents/skills/my-ai-setup/integrations/setup.mjs --only caveman,rtk --agent codex
+```
+
+The setup script asks before changing anything; `--yes` enables non-interactive opt-in. Review [integration setup and safety notes](integrations/README.md), including differences between a skill and RTK CLI hooks. Your installed skill path may differ.
+
 ## Quick start
 
 Install for Codex, Gemini CLI, and Claude Code on your computer:
