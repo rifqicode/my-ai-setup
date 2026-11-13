@@ -17,16 +17,16 @@ const value = (name, fallback) => {
 };
 const help = args.includes('--help') || args.includes('-h');
 if (help) {
-  console.log('Usage: node integrations/setup.mjs [--only caveman,rtk] [--agent claude|codex|gemini|all] [--dry-run] [--yes] [--skip caveman,rtk]');
+  console.log('Usage: node integrations/setup.mjs [--only caveman,rtk,systematic-debugging] [--agent claude|codex|gemini|all] [--dry-run] [--yes] [--skip caveman,rtk]');
   process.exit(0);
 }
-const choices = new Set(['caveman', 'rtk']);
+const choices = new Set(manifest.integrations.map(entry => entry.id));
 const parseNames = (flag, fallback) => {
   const items = value(flag, fallback).split(',').filter(Boolean);
   for (const item of items) if (!choices.has(item)) throw new Error('Unknown integration: ' + item);
   return new Set(items);
 };
-const only = parseNames('--only', 'caveman,rtk');
+const only = parseNames('--only', manifest.integrations.map(entry => entry.id).join(','));
 const skip = parseNames('--skip', '');
 const selected = [...only].filter(x => !skip.has(x));
 const agent = value('--agent', 'all');
@@ -72,7 +72,7 @@ for (const id of selected) {
   const entry = manifest.integrations.find(x => x.id === id);
   console.log('\n' + entry.name + ' — ' + entry.upstream);
   if (!(await confirm('Enable ' + id + '?'))) { console.log('Skipped.'); continue; }
-  if (id === 'caveman') {
+  if (entry.kind === 'agent-skill') {
     if (!commandExists('npx') && !dry) { console.error('npx missing: install Node.js/npm first.'); failures++; continue; }
     if (!run(entry.install.command, entry.install.args)) failures++;
     continue;
