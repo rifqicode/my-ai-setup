@@ -17,7 +17,7 @@ const value = (name, fallback) => {
 };
 const help = args.includes('--help') || args.includes('-h');
 if (help) {
-  console.log('Usage: node integrations/setup.mjs [--only caveman,rtk,systematic-debugging] [--agent claude|codex|gemini|all] [--dry-run] [--yes] [--skip caveman,rtk]');
+  console.log('Usage: node integrations/setup.mjs [--only caveman,rtk,systematic-debugging] [--agent claude|codex|antigravity|all] [--dry-run] [--yes] [--skip caveman,rtk]');
   process.exit(0);
 }
 const choices = new Set(manifest.integrations.map(entry => entry.id));
@@ -30,7 +30,7 @@ const only = parseNames('--only', manifest.integrations.map(entry => entry.id).j
 const skip = parseNames('--skip', '');
 const selected = [...only].filter(x => !skip.has(x));
 const agent = value('--agent', 'all');
-if (!['claude', 'codex', 'gemini', 'all'].includes(agent)) throw new Error('Invalid --agent');
+if (!['claude', 'codex', 'antigravity', 'all'].includes(agent)) throw new Error('Invalid --agent');
 const dry = args.includes('--dry-run');
 const yes = args.includes('--yes');
 const os = process.platform;
@@ -95,7 +95,7 @@ for (const id of selected) {
     console.error('rtk not found on PATH after installation. Restart terminal and rerun.');
     failures++; continue;
   }
-  const agents = agent === 'all' ? ['claude', 'codex', 'gemini'] : [agent];
+  const agents = agent === 'all' ? ['claude', 'codex', 'antigravity'] : [agent];
   for (const target of agents) {
     const initArgs = entry.init[target];
     console.log('Hook initialization modifies local ' + target + ' settings. Back up existing agent config first.');

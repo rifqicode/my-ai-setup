@@ -51,10 +51,11 @@
           "-g",
           "--codex"
         ],
-        "gemini": [
+        "antigravity": [
           "init",
           "-g",
-          "--gemini"
+          "--agent",
+          "antigravity"
         ]
       },
       "notes": "Changes agent hook/config; back up local configs before enabling."

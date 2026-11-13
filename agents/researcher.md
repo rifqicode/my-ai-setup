@@ -1,6 +1,14 @@
+---
+name: researcher
+description: Read-only investigation of codebase behavior, regressions and root causes using source-backed evidence.
+mainAgent: false
+subagent: true
+model: inherit
+---
+
 # Researcher — Role Specification v0.1
 
-> Status: Draft. Read-only repository investigator.
+> Status: Shared Researcher role definition; enforce read-only boundaries.
 > Architecture: [Handoff & Execution](../docs/agent-handoff-and-execution.md).
 
 ## Mission

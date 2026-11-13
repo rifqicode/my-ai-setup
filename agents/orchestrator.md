@@ -1,6 +1,14 @@
+---
+name: orchestrator
+description: Coordinates intent, impact assessment, planning, delegation and evidence reporting for development requests.
+mainAgent: true
+subagent: false
+model: inherit
+---
+
 # Orchestrator / Technical Lead — Role Specification v0.1
 
-> Status: Draft. Shared, platform-neutral role definition; not an installed/native subagent.
+> Status: Shared role definition; native invocation depends on the active host and permissions.
 > Architecture: [Handoff & Execution](../docs/agent-handoff-and-execution.md).
 
 ## Mission

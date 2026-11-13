@@ -1,0 +1,23 @@
+{
+  "name": "my-ai-setup",
+  "displayName": "My AI Setup",
+  "version": "0.2.0",
+  "description": "Impact-driven AI development workflow",
+  "category": "Developer Tools",
+  "keywords": [
+    "skills",
+    "orchestration",
+    "qa",
+    "debugging"
+  ],
+  "author": {
+    "name": "rifqicode"
+  },
+  "homepage": "https://github.com/rifqicode/my-ai-setup",
+  "repository": "https://github.com/rifqicode/my-ai-setup",
+  "license": "UNLICENSED",
+  "suggestedPrompts": [
+    "Fix this wording issue with minimal changes",
+    "Investigate the root cause of this failing test"
+  ]
+}
