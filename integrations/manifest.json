@@ -58,6 +58,25 @@
         ]
       },
       "notes": "Changes agent hook/config; back up local configs before enabling."
+    },
+    {
+      "id": "systematic-debugging",
+      "name": "Systematic Debugging",
+      "kind": "agent-skill",
+      "upstream": "https://github.com/obra/superpowers/tree/main/skills/systematic-debugging",
+      "install": {
+        "command": "npx",
+        "args": [
+          "skills",
+          "add",
+          "obra/superpowers",
+          "--skill",
+          "systematic-debugging",
+          "-g",
+          "-y"
+        ]
+      },
+      "notes": "Optional skill. Route debugging tasks via Orchestrator/Researcher; no automatic installation."
     }
   ]
 }
