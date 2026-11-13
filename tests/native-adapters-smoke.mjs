@@ -19,6 +19,12 @@ assert.equal(claude.name, 'my-ai-setup');
 assert.ok(existsSync(resolve(root, 'skills/my-ai-setup/SKILL.md')));
 assert.ok(existsSync(resolve(root, 'SKILL.md')));
 assert.ok(existsSync(resolve(root, 'agents/orchestrator.md')));
+assert.ok(existsSync(resolve(root, 'rules/AGENTS.md')));
+for (const role of ['orchestrator', 'researcher', 'coder', 'test-writer', 'qa']) {
+  const content = readFileSync(resolve(root, 'agents', role + '.md'), 'utf8');
+  assert.match(content, /^---\nname: /);
+  assert.match(content, /\nsubagent: (true|false)\n/);
+}
 assert.ok(manifest.integrations.some(x => x.id === 'systematic-debugging'));
 assert.equal(hooks.hooks.SessionStart[0].matcher, 'startup|clear|compact');
 const hookPath = resolve(root, 'hooks/session-start.mjs');
