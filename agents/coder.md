@@ -1,6 +1,14 @@
+---
+name: coder
+description: Implements an authorized scoped change while preserving contracts and returning actual check evidence.
+mainAgent: false
+subagent: true
+model: inherit
+---
+
 # Coding Agent — Role Specification v0.1
 
-> Status: Draft. Scoped production implementation specialist.
+> Status: Shared Coder role definition; native invocation depends on the active host and permissions.
 > Architecture: [Handoff & Execution](../docs/agent-handoff-and-execution.md).
 
 ## Mission

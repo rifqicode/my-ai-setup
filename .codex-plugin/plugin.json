@@ -1,0 +1,35 @@
+{
+  "name": "my-ai-setup",
+  "version": "0.2.0",
+  "description": "Impact-aware AI development workflow with role delegation and optional debugging skills.",
+  "author": {
+    "name": "rifqicode"
+  },
+  "homepage": "https://github.com/rifqicode/my-ai-setup",
+  "repository": "https://github.com/rifqicode/my-ai-setup",
+  "license": "UNLICENSED",
+  "keywords": [
+    "coding",
+    "orchestration",
+    "debugging",
+    "qa"
+  ],
+  "skills": "./skills/",
+  "hooks": {},
+  "interface": {
+    "displayName": "My AI Setup",
+    "shortDescription": "Impact-driven coding orchestrator",
+    "longDescription": "Fast Path for low-risk tasks, approved plans for material changes, role-scoped research, implementation and QA.",
+    "developerName": "rifqicode",
+    "category": "Developer Tools",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "defaultPrompt": [
+      "Fix this small UI wording issue.",
+      "Investigate why the API test is failing."
+    ]
+  }
+}
