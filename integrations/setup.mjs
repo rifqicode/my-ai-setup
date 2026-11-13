@@ -60,7 +60,7 @@ const confirm = async label => {
   try { return /^y(es)?$/i.test((await rl.question(label + ' [y/N] ')).trim()); }
   finally { rl.close(); }
 };
-console.log('my-ai-setup optional integrations | platform=' + os + ' | agent=' + agent);
+console.log('qark optional integrations | platform=' + os + ' | agent=' + agent);
 console.log('Selected: ' + (selected.join(', ') || 'none') + ' | dry-run=' + dry);
 if (!selected.length) process.exit(0);
 if (!dry && !yes && !stdin.isTTY) {
