@@ -42,7 +42,7 @@ agy plugin install https://github.com/rifqicode/my-ai-setup
 agy plugin list
 ```
 
-Restart the agent if needed and ask for a software task. Antigravity discovers relevant plugin skills on demand.
+Antigravity loads a lightweight always-on rule and discovers task-specific skills on demand. Validate a local checkout with `agy plugin validate --strict ./my-ai-setup` before distribution; native role files in `agents/` expose specialist agents subject to host permissions.
 
 **Claude Code — local plugin testing**
 
