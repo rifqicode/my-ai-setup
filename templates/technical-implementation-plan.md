@@ -2,7 +2,7 @@
 
 > Template v1.0 · Status: DRAFT · Plan ID: PLAN-YYYYMMDD-001 · Version: 0.1 · Owner: Orchestrator
 
-**Location convention:** Store each live plan in the **target project's** `.ai/plans/<plan-id>.md`, not in the installed `my-ai-setup` skills repository. Codex, Gemini and Claude adapters must resolve the *same canonical plan*. Where a CLI requires its own plan directory, create a link or generated read-only mirror, never a second editable source. Avoid absolute device-specific paths. See [Plan Storage](../docs/plan-storage.md).
+**Location convention:** Store each live plan in the **target project's** `.ai/plans/<plan-id>.md`, not in the installed `qark` skills repository. Codex, Gemini and Claude adapters must resolve the *same canonical plan*. Where a CLI requires its own plan directory, create a link or generated read-only mirror, never a second editable source. Avoid absolute device-specific paths. See [Plan Storage](../docs/plan-storage.md).
 
 **Adaptive:** Keep the sections relevant to the scope; expand when system risk requires it. Do not invent file paths, tests, or verification results.
 
