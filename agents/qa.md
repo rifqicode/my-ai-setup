@@ -1,6 +1,14 @@
+---
+name: qa
+description: Independently verifies actual application behavior and reports reproducible defects.
+mainAgent: false
+subagent: true
+model: inherit
+---
+
 # QA Agent — Role Specification v0.1
 
-> Status: Draft. Independent runtime verification specialist.
+> Status: Shared QA role definition; native invocation depends on the active host and permissions.
 > Architecture: [Handoff & Execution](../docs/agent-handoff-and-execution.md).
 
 ## Mission
