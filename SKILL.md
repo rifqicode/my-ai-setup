@@ -1,6 +1,6 @@
 ---
 name: qark
-description: Portable AI development team workflow for technical brainstorming, codebase research, implementation, automated test writing, and real-application QA. Use when the user requests software feature planning, implementation, debugging, testing, architecture or end-to-end validation using an Orchestrator and specialist roles.
+description: Route software development requests to Qark Orchestrator automatically when available. Use for feature implementation, bug fixes, refactoring, codebase research, technical planning, test writing, code review and QA. Select fast path for trivial edits, Grill Me for unclear requirements, technical approval for high-impact changes, and evidence-based review before QA.
 ---
 
 # Qark — Portable AI Development Team
