@@ -76,3 +76,4 @@ Native activation in all three tools still requires an end-to-end fresh-session 
 - [Code Reviewer](agents/code-reviewer.md): read-only static pre-QA review after integrated automated checks. Critical/high findings require fixes and re-review; runtime QA remains independent.
 
 These are workflow instructions, not proof of native subagent execution. Host capabilities determine whether review is independently delegated or sequential.
+\n## Optional Herdr agent visibility\n\nWhen working inside a real Herdr session, Qark can **opt-in** to launch separately authorized CLI specialist agents in panes to show their live output and state. Native internal subagents are **not** mirrored automatically. See [Herdr integration and limitations](integrations/herdr.md). This needs validation on a local Herdr runtime.\n
