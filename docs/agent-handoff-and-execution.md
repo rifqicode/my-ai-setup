@@ -56,8 +56,10 @@ flowchart TD
     O -->|Impact uncertain| R[Targeted read-only research]
     R --> G{Material impact?}
     G -->|No| F
-    G -->|Yes| H[Grill Me research challenge]\n    H --> P[Canonical Technical Plan]
-    O -->|Material impact| I[Grill Me intake challenge]\n    I --> P
+    G -->|Yes| H[Grill Me research challenge]
+    H --> P[Canonical Technical Plan]
+    O -->|Material impact| I[Grill Me intake challenge]
+    I --> P
     P --> A{User approval?}
     A -->|No| U
     A -->|Yes| E[Delegate approved implementation]
@@ -65,7 +67,9 @@ flowchart TD
     E --> V
     V --> K{New material impact?}
     K -->|Yes: pause affected work| P
-    K -->|No| C[Code review gate for nontrivial changes]\n    C -->|Critical/high finding: fix and re-review| E\n    C -->|PASS or proportionate Fast Path review| Q[Applicable runtime QA and evidence report]
+    K -->|No| C[Code review gate for nontrivial changes]
+    C -->|Critical/high finding: fix and re-review| E
+    C -->|PASS or proportionate Fast Path review| Q[Applicable runtime QA and evidence report]
     D --> X[Report]
     Q --> X
     X --> U
@@ -127,7 +131,9 @@ Before QA, Orchestrator confirms a testable combined state and reports:
 - Checks actually run (e.g., lint, typecheck, unit/integration tests, build).
 - Known failures, missing checks, tool limitations, and the exact test target/environment.
 
-For nontrivial changes, Code Reviewer must inspect the combined diff, relevant context and tests. Record reviewed ref, severity, file/symbol evidence and PASS/FAIL/BLOCKED/NOT_RUN separately from automated test results. CRITICAL/HIGH findings block QA and route back to implementation and review; MEDIUM requires a documented disposition. A separate agent is preferred but not guaranteed by the host. Trivial Fast Path changes may use proportional self-review.\n\nQA validates against the **approved plan where one exists**, or explicitly requested Fast Path behavior, not just assertions made by Coder or Test Writer. Where supported, QA uses Playwright/browser/CLI and captures enough evidence to reproduce a defect. When the required environment or tool is unavailable, report verification BLOCKED or NOT_RUN rather than PASS.
+For nontrivial changes, Code Reviewer must inspect the combined diff, relevant context and tests. Record reviewed ref, severity, file/symbol evidence and PASS/FAIL/BLOCKED/NOT_RUN separately from automated test results. CRITICAL/HIGH findings block QA and route back to implementation and review; MEDIUM requires a documented disposition. A separate agent is preferred but not guaranteed by the host. Trivial Fast Path changes may use proportional self-review.
+
+QA validates against the **approved plan where one exists**, or explicitly requested Fast Path behavior, not just assertions made by Coder or Test Writer. Where supported, QA uses Playwright/browser/CLI and captures enough evidence to reproduce a defect. When the required environment or tool is unavailable, report verification BLOCKED or NOT_RUN rather than PASS.
 
 ## 8. Finding and rework routing
 
@@ -157,7 +163,7 @@ For each scoped deliverable, communicate:
 
 Do not equate all tasks DONE with production-ready. Deployment/release requires its own permission and checks where appropriate.
 
-## 10. Portability rules
+## 10. Optional Herdr-visible agent execution\n\nFollow [Herdr adapter](../integrations/herdr.md) only when requested and supported. Herdr panes make **separately launched CLI processes** visible, not in-process native subagents. Protect write ownership and distinguish UI activity state from verified work status. Gracefully fall back when unavailable.\n\n## 11. Portability rules
 
 - Maintain these **logical contracts** independent of CLI vendor.
 - Use host-native subagents when offered, otherwise sequential role-scoped execution.
@@ -165,7 +171,7 @@ Do not equate all tasks DONE with production-ready. Deployment/release requires 
 - The installer/adapters (future work) map common roles and workflow to Codex, Gemini, and Claude capabilities.
 - Keep credentials, local paths, or device-specific runtime details outside shared specifications.
 
-## 11. Open design questions
+## 12. Open design questions
 
 1. Exact Technical Plan Markdown status layout and versioning policy.
 2. How to store run evidence and screenshots without bloating the repository.
