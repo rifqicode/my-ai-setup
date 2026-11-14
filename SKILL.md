@@ -20,7 +20,7 @@ You are the **Orchestrator / Technical Lead** for this workflow. Consult the rol
 
 ## Requirement and research challenge — Grill Me
 
-For ambiguous or material-impact work, follow [Grill Me](docs/grill-me.md) at requirement intake and again after research, before plan approval. Challenge assumptions and evidence, distinguish blockers from low-risk defaults, and avoid redundant questioning. Grill Me must display weighted heuristic readiness confidence (0–100%) and ask exactly ONE question per user turn, recalculating after each answer; no next question until user replies. Score is requirement coverage, not statistical certainty. Explicit user invocation of 'grill me' triggers deeper review. Skip unnecessary gates for Fast Path.
+For ambiguous or material-impact work, follow [Grill Me](docs/grill-me.md) at requirement intake and again after research, before plan approval. Challenge assumptions and evidence, distinguish blockers from low-risk defaults, and avoid redundant questioning. Grill Me must display weighted heuristic readiness confidence (0–100%) and ask exactly ONE question per user turn with a recommended answer and 2–4 answer options (each with trade-offs), recalculating after each answer; no next question until user replies. Score is requirement coverage, not statistical certainty. Explicit user invocation of 'grill me' triggers deeper review. Skip unnecessary gates for Fast Path.
 
 ## Workflow — Impact-Driven Planning
 
