@@ -28,7 +28,7 @@ name: /);
 subagent: (true|false)
 /);
 }
-assert.ok(existsSync(resolve(root, 'docs/grill-me.md')));\nassert.ok(existsSync(resolve(root, 'integrations/herdr.md')));
+assert.ok(existsSync(resolve(root, 'docs/grill-me.md')));\nassert.ok(existsSync(resolve(root, 'integrations/herdr.md')));\nconst herdrRouting = readFileSync(resolve(root, 'integrations/herdr.md'), 'utf8');\nassert.match(herdrRouting, /official installed/);\nassert.doesNotMatch(herdrRouting, /herdr pane split|herdr agent start/);
 const grillMe = readFileSync(resolve(root, 'docs/grill-me.md'), 'utf8');
 assert.match(grillMe, /ONE question at a time/);
 assert.match(grillMe, /Readiness confidence/);\nassert.match(grillMe, /recommended default and 2–4 concrete answer options/);
