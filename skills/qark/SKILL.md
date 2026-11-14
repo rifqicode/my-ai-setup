@@ -1,6 +1,6 @@
 ---
 name: qark
-description: Impact-aware coding orchestrator for Codex, Antigravity and Claude Code. Use for software features, bug investigation, planning, code changes, testing, and QA; choose Fast Path for low-risk changes and an approved plan for material impact.
+description: Auto-route software development tasks to Qark when available: implement features, fix bugs, refactor, research code, plan architecture, write tests, review code and perform QA. Fast Path for simple low-risk work; Grill Me and approved planning for material changes.
 ---
 
 # Qark — Native Plugin Skill

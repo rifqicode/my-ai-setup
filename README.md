@@ -12,22 +12,26 @@ flowchart TD
     O -->|Uncertain or bug| R[Researcher: evidence-first investigation]
     R -->|Optional skill available| S[Systematic Debugging]
     S --> G{Material impact?}
-    R -->|Other / unavailable| G
-    O -->|Material impact| P[Technical Plan + approval]
+    R -->|Other / unavailable| GR[Grill Me: research challenge]
+    GR --> G
+    O -->|Material impact| GI[Grill Me: intake]
+    GI --> P[Technical Plan + approval]
     G -->|No| F
     G -->|Yes| P
     P --> C[Coder + Test Writer]
-    C --> V[Verification]
+    C --> V[Automated verification]
     F --> V
-    V --> Q[QA where appropriate]
+    V --> CR[Code Reviewer gate for nontrivial changes]
+    CR -->|Critical/high: fix and re-review| C
+    CR -->|PASS| Q[QA where appropriate]
     Q --> X[Orchestrator report with evidence]
 ```
 
-One shared core in [SKILL.md](SKILL.md), five role specs in [agents/](agents/), and native adapter metadata for the three hosts. Subagent execution is host-dependent; the skill never claims unavailable parallelism. Optional skills load on demand, never silently install.
+One shared core in [SKILL.md](SKILL.md), six role specs in [agents/](agents/), and native adapter metadata for the three hosts. Subagent execution is host-dependent; the skill never claims unavailable parallelism. Optional skills load on demand, never silently install.
 
 ## Setup
 
-**Codex — stable skill installation**
+**AGY auto-routing:** If the Qark Antigravity plugin is enabled, its `rules/AGENTS.md` is loaded as an always-on rule. Standalone skill installation alone does not guarantee this. See [auto-activation guide](docs/auto-activation.md).\n\n**Codex — stable skill installation**
 
 ```bash
 npx skills add rifqicode/qark --skill qark -g -a codex -y
@@ -69,3 +73,15 @@ node tests/native-adapters-smoke.mjs
 ```
 
 Native activation in all three tools still requires an end-to-end fresh-session test; static tests cannot prove that a host invoked the right skill.
+
+## Quality gates
+
+- [Grill Me](docs/grill-me.md): question the requirement at intake and challenge research findings before approving a material-impact plan, using **one question per interaction**, a transparent weighted **readiness confidence % (heuristic)**, and updates after each answer. Skip for routine low-risk Fast Path tasks.
+- [Code Reviewer](agents/code-reviewer.md): read-only static pre-QA review after integrated automated checks. Critical/high findings require fixes and re-review; runtime QA remains independent.
+
+These are workflow instructions, not proof of native subagent execution. Host capabilities determine whether review is independently delegated or sequential.
+
+## Optional official Herdr skill\n\nFor meaningful agent delegation, Qark Orchestrator checks for the installed and usable **official Herdr skill**, reads its instructions and uses it when applicable to run visible separate CLI agents. There is **no custom Herdr adapter** or automatic installer in Qark. If unavailable, normal native/sequential delegation continues. Native internal subagents are not automatically shown as panes. See [Herdr routing](integrations/herdr.md).\n
+## Auto-discovery without mentioning Qark
+
+Skills are not guaranteed to activate implicitly. For reliable routing on new sessions, use the minimal [global bootstrap template](templates/global-bootstrap.md) and [Codex / Claude setup guide](docs/auto-activation.md). This does not automatically edit your global config or force heavy workflow on every prompt.

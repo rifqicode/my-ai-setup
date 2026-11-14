@@ -26,6 +26,8 @@
 | --- | --- | --- |
 | [Module / flow] | [Path, symbol, branch/ref] | [Constraint or reuse] |
 
+**Grill Me checkpoints:** [Intake and post-research readiness confidence NN% (heuristic), five dimension scores, question-by-question decisions, blockers/resolutions, or why skipped. Confidence is requirement coverage, not a probability or approval.]
+
 ## 3. Technical design & decisions
 
 **Proposed approach:** [Solution and rationale]
@@ -56,7 +58,8 @@
 | RES-01 | Researcher | Verify existing architecture | — | — | TODO | NOT_RUN | — |
 | IMP-01 | Coder | Implement scoped change | RES-01 | AC-01 | TODO | NOT_RUN | — |
 | TEST-01 | Test Writer | Automated tests | Stable contract | AC-01, AC-02 | TODO | NOT_RUN | — |
-| QA-01 | QA | Real-app validation | IMP-01, TEST-01 | AC-01, AC-02 | TODO | NOT_RUN | — |
+| REVIEW-01 | Code Reviewer | Review combined implementation and test diff | IMP-01, TEST-01 | AC-01, AC-02 | TODO | NOT_RUN | — |
+| QA-01 | QA | Real-app validation | REVIEW-01 | AC-01, AC-02 | TODO | NOT_RUN | — |
 
 **Work statuses:** TODO / IN_PROGRESS / BLOCKED / DONE / SKIPPED
 
@@ -73,7 +76,17 @@
 
 **Coverage gaps:** [If any]
 
-## 7. Runtime QA — QA Agent
+## 7. Code review — Pre-QA Gate
+
+**Reviewed ref / diff:** [commit or branch]
+
+**Gate:** NOT_RUN / PASS / FAIL / BLOCKED; unresolved CRITICAL/HIGH findings block QA.
+
+| Finding | Severity | Path / symbol evidence | Required fix / disposition | Status |
+| --- | --- | --- | --- | --- |
+| — | — | — | — | — |
+
+## 8. Runtime QA — QA Agent
 
 **Environment / tested ref:** [URL, build hash, branch or CLI target]
 
@@ -86,16 +99,18 @@
 
 If runtime/tool access is missing, record BLOCKED/NOT_RUN. Do not claim PASS from static review.
 
-## 8. Risks, blockers & open questions
+## 9. Risks, blockers & open questions
 
 | ID | Scenario | Impact | Mitigation / verification | Owner | Status |
 | --- | --- | --- | --- | --- | --- |
 | R-01 | [Risk] | [Consequence] | [Mitigation and test] | [Agent] | OPEN |
 
-## 9. Integration & delivery gate
+## 10. Integration & delivery gate
 
 - [ ] Agent work integrated without unresolved edit conflicts
 - [ ] Required lint/typecheck/build/tests executed and results captured
+- [ ] Pre-QA code review completed on the integrated ref, or proportionate Fast Path review documented
+- [ ] No unresolved CRITICAL/HIGH code review findings
 - [ ] QA performed on the combined testable state, or gaps are explicitly BLOCKED/NOT_RUN
 - [ ] High-impact defects addressed or explicitly accepted by user
 - [ ] Scope changes and significant design deviations approved
