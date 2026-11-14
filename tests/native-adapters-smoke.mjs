@@ -22,10 +22,20 @@ assert.ok(existsSync(resolve(root, 'agents/orchestrator.md')));
 assert.ok(existsSync(resolve(root, 'rules/AGENTS.md')));
 for (const role of ['orchestrator', 'researcher', 'coder', 'test-writer', 'code-reviewer', 'qa']) {
   const content = readFileSync(resolve(root, 'agents', role + '.md'), 'utf8');
-  assert.match(content, /^---\nname: /);
-  assert.match(content, /\nsubagent: (true|false)\n/);
+  assert.match(content, /^---
+name: /);
+  assert.match(content, /
+subagent: (true|false)
+/);
 }
-assert.ok(existsSync(resolve(root, 'docs/grill-me.md')));\nconst grillMe = readFileSync(resolve(root, 'docs/grill-me.md'), 'utf8');\nassert.match(grillMe, /ONE question at a time/);\nassert.match(grillMe, /Readiness confidence/);\nassert.match(grillMe, /round\(/);\nassert.match(readFileSync(resolve(root, 'SKILL.md'), 'utf8'), /Code Reviewer/);\nassert.match(readFileSync(resolve(root, 'SKILL.md'), 'utf8'), /Grill Me/);\nassert.ok(manifest.integrations.some(x => x.id === 'systematic-debugging'));
+assert.ok(existsSync(resolve(root, 'docs/grill-me.md')));
+const grillMe = readFileSync(resolve(root, 'docs/grill-me.md'), 'utf8');
+assert.match(grillMe, /ONE question at a time/);
+assert.match(grillMe, /Readiness confidence/);
+assert.match(grillMe, /round\(/);
+assert.match(readFileSync(resolve(root, 'SKILL.md'), 'utf8'), /Code Reviewer/);
+assert.match(readFileSync(resolve(root, 'SKILL.md'), 'utf8'), /Grill Me/);
+assert.ok(manifest.integrations.some(x => x.id === 'systematic-debugging'));
 assert.equal(hooks.hooks.SessionStart[0].matcher, 'startup|clear|compact');
 const hookPath = resolve(root, 'hooks/session-start.mjs');
 const syntax = spawnSync(process.execPath, ['--check', hookPath], { encoding: 'utf8' });
