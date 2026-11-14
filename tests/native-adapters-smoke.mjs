@@ -28,10 +28,10 @@ name: /);
 subagent: (true|false)
 /);
 }
-assert.ok(existsSync(resolve(root, 'docs/grill-me.md')));
+assert.ok(existsSync(resolve(root, 'docs/grill-me.md')));\nassert.ok(existsSync(resolve(root, 'integrations/herdr.md')));
 const grillMe = readFileSync(resolve(root, 'docs/grill-me.md'), 'utf8');
 assert.match(grillMe, /ONE question at a time/);
-assert.match(grillMe, /Readiness confidence/);
+assert.match(grillMe, /Readiness confidence/);\nassert.match(grillMe, /recommended default and 2–4 concrete answer options/);
 assert.match(grillMe, /round\(/);
 assert.match(readFileSync(resolve(root, 'SKILL.md'), 'utf8'), /Code Reviewer/);
 assert.match(readFileSync(resolve(root, 'SKILL.md'), 'utf8'), /Grill Me/);
