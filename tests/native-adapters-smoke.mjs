@@ -28,7 +28,7 @@ name: /);
 subagent: (true|false)
 /);
 }
-assert.ok(existsSync(resolve(root, 'docs/grill-me.md')));\nassert.ok(existsSync(resolve(root, 'integrations/herdr.md')));\nconst herdrRouting = readFileSync(resolve(root, 'integrations/herdr.md'), 'utf8');\nassert.match(herdrRouting, /official installed/);\nassert.doesNotMatch(herdrRouting, /herdr pane split|herdr agent start/);
+assert.ok(existsSync(resolve(root, 'docs/grill-me.md')));\nassert.ok(existsSync(resolve(root, 'templates/global-bootstrap.md')));\nassert.ok(existsSync(resolve(root, 'docs/auto-activation.md')));\nassert.ok(existsSync(resolve(root, 'integrations/herdr.md')));\nconst herdrRouting = readFileSync(resolve(root, 'integrations/herdr.md'), 'utf8');\nassert.match(herdrRouting, /official installed/);\nassert.doesNotMatch(herdrRouting, /herdr pane split|herdr agent start/);
 const grillMe = readFileSync(resolve(root, 'docs/grill-me.md'), 'utf8');
 assert.match(grillMe, /ONE question at a time/);
 assert.match(grillMe, /Readiness confidence/);\nassert.match(grillMe, /recommended default and 2–4 concrete answer options/);
@@ -44,7 +44,7 @@ const out = spawnSync(process.execPath, [hookPath], { encoding: 'utf8' });
 assert.equal(out.status, 0, out.stderr);
 const payload = JSON.parse(out.stdout);
 assert.equal(payload.hookSpecificOutput.hookEventName, 'SessionStart');
-assert.match(payload.hookSpecificOutput.additionalContext, /Impact-Driven Planning/);
+assert.match(payload.hookSpecificOutput.additionalContext, /Impact-Driven Planning/);\nassert.match(payload.hookSpecificOutput.additionalContext, /even when the user does not say qark/);
 assert.match(payload.hookSpecificOutput.additionalContext, /systematic-debugging/);
 assert.doesNotMatch(payload.hookSpecificOutput.additionalContext, /install.*automatically/i);
 const installer = spawnSync(process.execPath, ['--check', resolve(root, 'integrations/setup.mjs')], { encoding: 'utf8' });
