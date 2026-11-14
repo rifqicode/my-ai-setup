@@ -72,7 +72,7 @@ Native activation in all three tools still requires an end-to-end fresh-session 
 
 ## Quality gates
 
-- [Grill Me](docs/grill-me.md): question the requirement at intake and challenge research findings before approving a material-impact plan; skip for routine low-risk Fast Path tasks.
+- [Grill Me](docs/grill-me.md): question the requirement at intake and challenge research findings before approving a material-impact plan, using **one question per interaction**, a transparent weighted **readiness confidence % (heuristic)**, and updates after each answer. Skip for routine low-risk Fast Path tasks.
 - [Code Reviewer](agents/code-reviewer.md): read-only static pre-QA review after integrated automated checks. Critical/high findings require fixes and re-review; runtime QA remains independent.
 
 These are workflow instructions, not proof of native subagent execution. Host capabilities determine whether review is independently delegated or sequential.
