@@ -12,18 +12,18 @@ flowchart TD
     O -->|Uncertain or bug| R[Researcher: evidence-first investigation]
     R -->|Optional skill available| S[Systematic Debugging]
     S --> G{Material impact?}
-    R -->|Other / unavailable| G
-    O -->|Material impact| P[Technical Plan + approval]
+    R -->|Other / unavailable| GR[Grill Me: research challenge]\n    GR --> G
+    O -->|Material impact| GI[Grill Me: intake]\n    GI --> P[Technical Plan + approval]
     G -->|No| F
     G -->|Yes| P
     P --> C[Coder + Test Writer]
-    C --> V[Verification]
+    C --> V[Automated verification]
     F --> V
-    V --> Q[QA where appropriate]
+    V --> CR[Code Reviewer gate for nontrivial changes]\n    CR -->|Critical/high: fix and re-review| C\n    CR -->|PASS| Q[QA where appropriate]
     Q --> X[Orchestrator report with evidence]
 ```
 
-One shared core in [SKILL.md](SKILL.md), five role specs in [agents/](agents/), and native adapter metadata for the three hosts. Subagent execution is host-dependent; the skill never claims unavailable parallelism. Optional skills load on demand, never silently install.
+One shared core in [SKILL.md](SKILL.md), six role specs in [agents/](agents/), and native adapter metadata for the three hosts. Subagent execution is host-dependent; the skill never claims unavailable parallelism. Optional skills load on demand, never silently install.
 
 ## Setup
 
@@ -69,3 +69,10 @@ node tests/native-adapters-smoke.mjs
 ```
 
 Native activation in all three tools still requires an end-to-end fresh-session test; static tests cannot prove that a host invoked the right skill.
+
+## Quality gates
+
+- [Grill Me](docs/grill-me.md): question the requirement at intake and challenge research findings before approving a material-impact plan; skip for routine low-risk Fast Path tasks.
+- [Code Reviewer](agents/code-reviewer.md): read-only static pre-QA review after integrated automated checks. Critical/high findings require fixes and re-review; runtime QA remains independent.
+
+These are workflow instructions, not proof of native subagent execution. Host capabilities determine whether review is independently delegated or sequential.
