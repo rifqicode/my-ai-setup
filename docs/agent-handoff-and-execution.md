@@ -4,13 +4,15 @@
 
 ## 1. Goal
 
-Coordinate five portable roles (Orchestrator, Researcher, Coder, Test Writer, QA) using **Impact-Driven Planning**: low-impact authorized tasks take Fast Path without a plan, while material changes use one approved **Technical Implementation Plan** as the source of truth. Minimize redundant documents, conflicting edits, unverified completion claims, and uncontrolled rework.
+Coordinate six portable roles (Orchestrator, Researcher, Coder, Test Writer, Code Reviewer, QA) using **Impact-Driven Planning**: low-impact authorized tasks take Fast Path without a plan, while material changes use one approved **Technical Implementation Plan** as the source of truth. Minimize redundant documents, conflicting edits, unverified completion claims, and uncontrolled rework.
 
 ## 2. Control plane and execution plane
 
 - **Orchestrator is the control plane.** Owns user communication, research requests, plan approval, task assignment, dependency ordering, result aggregation, tracking, triage, and final reporting.
 - **Specialists are the execution plane.** Receive a bounded assignment identified by a task ID *in the Technical Plan* for planned work, or a concise scoped instruction for Fast Path; report progress and evidence, but do not amend approved scope or approve their own work.
 - **Researcher is read-only.** May be invoked before planning or again during triage when further codebase investigation is necessary.
+- **Grill Me** is an Orchestrator-led challenge protocol at intake and after research, not a new approval authority. See [Grill Me](grill-me.md).
+- **Code Reviewer** performs read-only static review on the integrated changes after automated checks and before QA. Critical/high findings must be fixed and re-reviewed. If host cannot launch a separate reviewer, disclose a sequential role-scoped pass.
 - **QA is independent of implementation.** Validates running behavior and reports defects, not silent production-code fixes.
 - **Human is the decision authority** for materially altered scope, major architecture changes, risky irreversible operations, and final release authorization where applicable.
 
@@ -54,8 +56,8 @@ flowchart TD
     O -->|Impact uncertain| R[Targeted read-only research]
     R --> G{Material impact?}
     G -->|No| F
-    G -->|Yes| P[Canonical Technical Plan]
-    O -->|Material impact| P
+    G -->|Yes| H[Grill Me research challenge]\n    H --> P[Canonical Technical Plan]
+    O -->|Material impact| I[Grill Me intake challenge]\n    I --> P
     P --> A{User approval?}
     A -->|No| U
     A -->|Yes| E[Delegate approved implementation]
@@ -63,7 +65,7 @@ flowchart TD
     E --> V
     V --> K{New material impact?}
     K -->|Yes: pause affected work| P
-    K -->|No| Q[Applicable QA and evidence report]
+    K -->|No| C[Code review gate for nontrivial changes]\n    C -->|Critical/high finding: fix and re-review| E\n    C -->|PASS or proportionate Fast Path review| Q[Applicable runtime QA and evidence report]
     D --> X[Report]
     Q --> X
     X --> U
@@ -118,14 +120,14 @@ Example (illustrative only):
 | QA-01 | QA | DONE | FAIL | Reproduction steps + screenshot |
 | IMP-02 | Coder | BLOCKED | NOT_RUN | Waiting for approved API decision |
 
-## 7. Integration and QA gates
+## 7. Integration, code review and QA gates
 
 Before QA, Orchestrator confirms a testable combined state and reports:
 - Which changes are present and whether merge/file conflicts were resolved.
 - Checks actually run (e.g., lint, typecheck, unit/integration tests, build).
 - Known failures, missing checks, tool limitations, and the exact test target/environment.
 
-QA validates against the **approved plan where one exists**, or explicitly requested Fast Path behavior, not just assertions made by Coder or Test Writer. Where supported, QA uses Playwright/browser/CLI and captures enough evidence to reproduce a defect. When the required environment or tool is unavailable, report verification BLOCKED or NOT_RUN rather than PASS.
+For nontrivial changes, Code Reviewer must inspect the combined diff, relevant context and tests. Record reviewed ref, severity, file/symbol evidence and PASS/FAIL/BLOCKED/NOT_RUN separately from automated test results. CRITICAL/HIGH findings block QA and route back to implementation and review; MEDIUM requires a documented disposition. A separate agent is preferred but not guaranteed by the host. Trivial Fast Path changes may use proportional self-review.\n\nQA validates against the **approved plan where one exists**, or explicitly requested Fast Path behavior, not just assertions made by Coder or Test Writer. Where supported, QA uses Playwright/browser/CLI and captures enough evidence to reproduce a defect. When the required environment or tool is unavailable, report verification BLOCKED or NOT_RUN rather than PASS.
 
 ## 8. Finding and rework routing
 
