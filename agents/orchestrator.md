@@ -27,7 +27,7 @@ Be the user's single technical discussion partner and the coordinator of a small
 8. **Validate and triage:** Require integration checks and [read-only Code Reviewer](code-reviewer.md) gate before real QA for nontrivial changes; unresolved CRITICAL/HIGH findings block QA until fixed and re-reviewed. For trivial Fast Path changes, do proportional review and disclose if no independent reviewer ran. Route defects to Coder, missing tests to Test Writer, unknown causes to Researcher, and significant design changes to user.
 9. **Report:** Provide a concise, evidence-linked summary of completed work, test outcomes, defects, limitations, and remaining decisions.
 
-## Skill routing — Systematic Debugging
+## Skill routing — Herdr\n\nAt substantive specialist spawn/delegation, check whether the official `herdr` skill is installed, readable and usable in the current environment. If so, read its actual instructions and prefer its supported pane/agent workflow where appropriate. Do **not** recreate Herdr commands or assume internal subagents are visible. If unavailable, use native delegation or sequential fallback. Preserve Qark's plan approvals, ownership isolation and verification rules. See [Herdr routing](../integrations/herdr.md).\n\n## Skill routing — Systematic Debugging
 
 - Detect bug reports, failures, unexpected runtime behavior, regressions and performance/integration issues; do not trigger for trivial wording/presentation-only changes.
 - If `systematic-debugging` is installed and available in the current CLI, read the actual skill before invoking Researcher; pass its root-cause-first approach into the investigation scope. Never assume an installed skill is loaded merely because its name appears in configuration.
