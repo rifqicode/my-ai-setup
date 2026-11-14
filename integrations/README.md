@@ -40,3 +40,4 @@ rtk gain
 ```
 
 This installer provides orchestration, not a vendor-specific uninstall/rollback manager. Confirm upstream versions and review third-party code before opting in.
+\n## Herdr visibility adapter (opt-in; no automatic installer)\n\nSee [Herdr](herdr.md) for a pane-based separate-CLI-agent workflow, activation, limitations and local acceptance tests. This is not an external package automatically installed by Qark, and native embedded subagents cannot be mirrored to panes without separate processes.\n
