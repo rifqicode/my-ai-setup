@@ -12,14 +12,18 @@ flowchart TD
     O -->|Uncertain or bug| R[Researcher: evidence-first investigation]
     R -->|Optional skill available| S[Systematic Debugging]
     S --> G{Material impact?}
-    R -->|Other / unavailable| GR[Grill Me: research challenge]\n    GR --> G
-    O -->|Material impact| GI[Grill Me: intake]\n    GI --> P[Technical Plan + approval]
+    R -->|Other / unavailable| GR[Grill Me: research challenge]
+    GR --> G
+    O -->|Material impact| GI[Grill Me: intake]
+    GI --> P[Technical Plan + approval]
     G -->|No| F
     G -->|Yes| P
     P --> C[Coder + Test Writer]
     C --> V[Automated verification]
     F --> V
-    V --> CR[Code Reviewer gate for nontrivial changes]\n    CR -->|Critical/high: fix and re-review| C\n    CR -->|PASS| Q[QA where appropriate]
+    V --> CR[Code Reviewer gate for nontrivial changes]
+    CR -->|Critical/high: fix and re-review| C
+    CR -->|PASS| Q[QA where appropriate]
     Q --> X[Orchestrator report with evidence]
 ```
 
@@ -76,4 +80,5 @@ Native activation in all three tools still requires an end-to-end fresh-session 
 - [Code Reviewer](agents/code-reviewer.md): read-only static pre-QA review after integrated automated checks. Critical/high findings require fixes and re-review; runtime QA remains independent.
 
 These are workflow instructions, not proof of native subagent execution. Host capabilities determine whether review is independently delegated or sequential.
-\n## Optional Herdr agent visibility\n\nWhen working inside a real Herdr session, Qark can **opt-in** to launch separately authorized CLI specialist agents in panes to show their live output and state. Native internal subagents are **not** mirrored automatically. See [Herdr integration and limitations](integrations/herdr.md). This needs validation on a local Herdr runtime.\n
+
+## Optional official Herdr skill\n\nFor meaningful agent delegation, Qark Orchestrator checks for the installed and usable **official Herdr skill**, reads its instructions and uses it when applicable to run visible separate CLI agents. There is **no custom Herdr adapter** or automatic installer in Qark. If unavailable, normal native/sequential delegation continues. Native internal subagents are not automatically shown as panes. See [Herdr routing](integrations/herdr.md).\n
