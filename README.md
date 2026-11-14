@@ -31,7 +31,7 @@ One shared core in [SKILL.md](SKILL.md), six role specs in [agents/](agents/), a
 
 ## Setup
 
-**Codex — stable skill installation**
+**AGY auto-routing:** If the Qark Antigravity plugin is enabled, its `rules/AGENTS.md` is loaded as an always-on rule. Standalone skill installation alone does not guarantee this. See [auto-activation guide](docs/auto-activation.md).\n\n**Codex — stable skill installation**
 
 ```bash
 npx skills add rifqicode/qark --skill qark -g -a codex -y
