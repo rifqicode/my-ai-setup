@@ -10,7 +10,7 @@ This is an **Orchestrator-led conversation protocol**, not a separate runtime, o
 
 ## Mandatory conversational behavior — ONE question at a time
 1. **Assess first** using information already in the current conversation and the code/research actually inspected. Do not ask what is already known.
-2. Show current stage, **Readiness confidence NN%**, the highest-leverage uncertainty, *why it matters* (one short sentence), then ask **exactly ONE** clear question. Optional concise recommended default or 2–3 answer choices can accompany that same question; never embed a second independent question in an option.
+2. Show current stage, **Readiness confidence NN%**, the highest-leverage uncertainty, *why it matters* (one short sentence), then ask **exactly ONE** clear question. **MANDATORY: include a recommended default and 2–4 concrete answer options for EVERY question**, with a short trade-off/consequence for each. Clearly mark one as **Recommended** and explain why. Options must all answer the SAME single question; they are not separate follow-up questions. Include **Other / custom answer** when applicable. Even for open-ended questions, offer realistic example directions and allow the user to answer freely. Do not quietly choose the recommended option for a material decision.
 3. **STOP and wait for the user's answer.** Do not ask the next question in the same message, even as a numbered list or a preview. Never auto-answer questions that require a material business/design decision.
 4. After each answer, record the decision, refresh the evidence/rubric and **recalculate confidence**. If another material issue remains, ask only the next highest-leverage question. If an answer creates a contradiction, surface it as the next single question.
 5. Let the user **skip** a question or request a summary. A skipped material blocker remains OPEN; explain consequences and do not silently deem it approved. Mark low-risk assumptions explicitly.
@@ -54,9 +54,9 @@ Formula: **round(Σ(weight × dimension score / 4))**. Show whole-number percent
 
 **Recommendation:** [Short default, if appropriate.]
 
-**Question 1:** [One concrete question?]
+**Question 1:** [One concrete question?]\n\n- **A — [Option] (Recommended):** [why + trade-off]\n- **B — [Option]:** [why + trade-off]\n- **C — [Option]:** [why + trade-off]\n- **Other:** [User-defined option, when applicable]
 
-Stop here. On the next turn, update confidence, briefly acknowledge the answer, then ask *Question 2* only if needed. Do not display an entire backlog of future questions.
+Stop here. On the next turn, update confidence, briefly acknowledge the answer, then ask *Question 2* only if needed. Every question must have choices and a suggested best option; do not display an entire backlog of future questions.
 
 ## Handoff to planning
 Summarize readiness by stage, dimension ratings, evidence references, decisions, labeled low-risk assumptions, unresolved items, and acceptance criteria. Record in the **single canonical Technical Plan**, not an extra approval document. User approval for material-impact implementation remains separate.
