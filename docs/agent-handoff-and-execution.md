@@ -163,7 +163,7 @@ For each scoped deliverable, communicate:
 
 Do not equate all tasks DONE with production-ready. Deployment/release requires its own permission and checks where appropriate.
 
-## 10. Optional Herdr-visible agent execution\n\nFollow [Herdr adapter](../integrations/herdr.md) only when requested and supported. Herdr panes make **separately launched CLI processes** visible, not in-process native subagents. Protect write ownership and distinguish UI activity state from verified work status. Gracefully fall back when unavailable.\n\n## 11. Portability rules
+## 10. Optional official Herdr skill routing\n\nWhen the installed official `herdr` skill is readable and usable, Orchestrator follows it for separately spawned visible CLI agents rather than maintaining an in-house pane adapter. If absent, native delegation/sequential fallback applies. Qark retains approval, file ownership and verification authority; native in-process subagents are not assumed visible. See [Herdr routing](../integrations/herdr.md).\n\n## 11. Portability rules
 
 - Maintain these **logical contracts** independent of CLI vendor.
 - Use host-native subagents when offered, otherwise sequential role-scoped execution.
