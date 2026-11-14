@@ -16,6 +16,20 @@ For installations that only expose Qark as a skill, merge [global-bootstrap.md](
 
 Verify via a fresh Claude session and an ordinary software feature request that does not mention Qark. Use Claude's `/doctor` / plugin configuration inspection if the hook seems inactive. Ask for concrete evidence of which skill file was read.
 
+## Antigravity (AGY)
+
+Qark already ships `rules/AGENTS.md` as a **plugin always-on rule**. Official Antigravity plugin discovery loads this rule on every session **when the Qark plugin is installed and enabled**, even when the user does not name Qark. Do not confuse this with installing only a standalone Qark skill.
+
+```bash
+agy plugin list
+agy plugin validate --strict ./qark
+agy plugin install https://github.com/rifqicode/qark
+```
+
+The validation command assumes a local `./qark` checkout; run it only when that checkout exists. For global routing without a plugin, merge [global-bootstrap.md](../templates/global-bootstrap.md) into `~/.gemini/AGENTS.md`, preserving existing instructions. AGY also recognizes personal customizations under `~/.gemini/config/`, but do not create duplicate bootstraps when an enabled Qark plugin already supplies its always-on rule.
+
+After installing/enabling, restart AGY and send an ordinary development request without mentioning Qark. Verify the plugin is enabled, that its `rules/AGENTS.md` is discovered, and that the canonical Qark skill was actually read. Neither a listed installation nor model claims alone prove activation.
+
 ## Safeguards
 
 - A global bootstrap only routes *relevant* development work to Qark; regular conversation and nondevelopment tasks need not load it.
