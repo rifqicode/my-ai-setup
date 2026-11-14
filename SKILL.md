@@ -45,7 +45,7 @@ Do not trigger this skill for isolated wording or presentation-only edits, expla
 
 A `SKILL.md` is **instruction packaging**, not a multi-agent runtime. Use native subagent tooling only when the current Codex, Antigravity, or Claude environment exposes it. If unavailable, execute scoped stages sequentially and explicitly say no independent or parallel subagents were launched. Never invent tool usage or independent QA.
 
-## Progress and evidence
+## Optional Herdr-visible execution\n\nWhen the user requests Qark agents visibly running in Herdr, follow [Herdr integration](integrations/herdr.md). Spawn separately authorized CLI role processes in Herdr panes only when actually supported; native internal subagents cannot automatically appear as separate panes. Without Herdr, use normal delegation/fallback. Do not interpret Herdr UI status as Qark verification.\n\n## Progress and evidence
 
 - Work: `TODO`, `IN_PROGRESS`, `BLOCKED`, `DONE`, `SKIPPED`.
 - Verification: `NOT_RUN`, `PASS`, `FAIL`, `BLOCKED`.
